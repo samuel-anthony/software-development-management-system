@@ -58,9 +58,19 @@
                         </li>
                 </ul>
 
-    <main class="py-4">
-            @yield('content')
-    </main>
+    <div class="row">
+
+        <div class="col s3">
+        <!-- Grey navigation panel -->
+        </div>
+
+        <div class="col s9">
+            <main class="container">
+                @yield('content')
+            </main>
+        </div>
+
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
         const slide_menu = document.querySelectorAll(".sidenav");
