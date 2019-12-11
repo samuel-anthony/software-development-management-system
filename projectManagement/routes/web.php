@@ -15,9 +15,13 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+Route::get('/createUser','Auth\RegisterController@registerNew');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/tes', function(){
-    return view('examples/tes');
+Route::get('/tes/{menu}', 'test@getMenu');
+Route::get('/tes/{menu}', 'test@getMenu');
+Route::get('/example',function () {
+    return view('example');
 });

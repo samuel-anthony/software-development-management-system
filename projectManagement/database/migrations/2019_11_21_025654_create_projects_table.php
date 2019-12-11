@@ -14,8 +14,14 @@ class CreateProjectsTable extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('proj_id');
+            $table->unsignedBigInteger('comp_id');
+            $table->date('due_date');
+            $table->string('requirement')->nullable();
+            $table->string('user_id')->references('user_id')->on('users')->nullable();
             $table->timestamps();
+            
+            $table->foreign('comp_id')->references('comp_id')->on('companies');
         });
     }
 

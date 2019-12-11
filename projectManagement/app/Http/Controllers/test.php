@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\menu;
 class test extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -16,8 +16,20 @@ class test extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    /*public function getMenu()
     {
-        return view('welcome');
+        $allMenu = menu::all();
+            return view('/layouts/customlayout',[
+        'allMenu' => $allMenu,
+      ]);
+    }*/
+    public function getMenu($param1)
+    {
+        //$allMenu = menu::where('parent_menu_id','=',$param1)->get();
+        $allMenu = menu::parentMenuId($param1)->get();
+              
+        return view('/layouts/customlayout',[
+            'allMenu' => $allMenu,
+      ]);
     }
 }

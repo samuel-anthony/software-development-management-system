@@ -422,16 +422,16 @@ Copyright (c) 2015 Daniel Eden
     top: 1px; }
 
 .btn-primary {
-  background-color: #f96332;
+  background-color: #007bff;
   color: #FFFFFF; }
   .btn-primary:hover, .btn-primary:focus, .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:active:hover, .btn-primary.active:hover,
   .show > .btn-primary.dropdown-toggle,
   .show > .btn-primary.dropdown-toggle:focus,
   .show > .btn-primary.dropdown-toggle:hover {
-    background-color: #fa7a50;
+    background-color: #00c9ff;
     color: #FFFFFF;
     box-shadow: none;
-    border-color: #fa7a50; }
+    border-color: #00c9ff; }
   .btn-primary:not([data-action]):not([class*="btn-outline-"]):hover {
     box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.17); }
   .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary:disabled, .btn-primary:disabled:hover, .btn-primary:disabled:focus, .btn-primary:disabled.focus, .btn-primary:disabled:active, .btn-primary:disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled].active,
@@ -441,13 +441,13 @@ Copyright (c) 2015 Daniel Eden
   fieldset[disabled] .btn-primary.focus,
   fieldset[disabled] .btn-primary:active,
   fieldset[disabled] .btn-primary.active {
-    background-color: #f96332;
-    border-color: #f96332; }
+    background-color: #007bff;
+    border-color: #007bff; }
   .btn-primary.btn-link {
-    color: #f96332; }
+    color: #007bff; }
     .btn-primary.btn-link:hover, .btn-primary.btn-link:focus, .btn-primary.btn-link:active {
       background-color: transparent;
-      color: #fa7a50;
+      color: #00c9ff;
       text-decoration: none;
       box-shadow: none; }
 
@@ -829,7 +829,7 @@ fieldset[disabled]
   transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
   box-shadow: none; }
   .form-control:focus {
-    border: 1px solid #f96332;
+    border: 1px solid #007bff;
     box-shadow: none;
     outline: 0 !important;
     color: #2c2c2c; }
@@ -837,11 +837,11 @@ fieldset[disabled]
     .form-control:focus ~ .input-group-append .input-group-text,
     .form-control:focus + .input-group-prepend .input-group-text,
     .form-control:focus ~ .input-group-prepend .input-group-text {
-      border: 1px solid #f96332;
+      border: 1px solid #007bff;
       border-left: none;
       background-color: transparent; }
   .has-success .form-control,
-  .has-error .form-control,
+  .has-error .form-control,s
   .has-success .form-control:focus,
   .has-error .form-control:focus {
     box-shadow: none; }

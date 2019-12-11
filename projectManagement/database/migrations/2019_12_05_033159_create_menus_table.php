@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompaniesTable extends Migration
+class CreateMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('menus', function (Blueprint $table) {
+            $table->bigIncrements('menu_id');
+            $table->string('menu_name');
+            $table->unsignedBigInteger('parent_menu_id')->nullable();
             $table->timestamps();
+            
+            $table->foreign('parent_menu_id')->references('menu_id')->on('menus');
         });
     }
 
@@ -26,6 +30,6 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('menus');
     }
 }

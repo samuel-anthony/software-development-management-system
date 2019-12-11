@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.customlayout')
 
 @section('content')
 <div class="container">
@@ -24,7 +24,17 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">Role</label>
 
+                            <div class="col-md-6">
+                                <select class="form-control custom-select" id="role" name="role">
+                                    @for($counter = 0;$counter < count($allRole); $counter++)
+                                        <option value="{{$allRole[$counter]['role_id']}}">{{$allRole[$counter]['role_name']}}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 

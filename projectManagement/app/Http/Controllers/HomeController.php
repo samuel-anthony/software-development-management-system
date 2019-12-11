@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\menu;
+use App\role_menu;
+use App\User;
 
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +27,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //$allMenu = menu::where('parent_menu_id','=',$param1)->get();
+        $allMenu = DB::table('role_menus')
+                        ->join('menus','role_menus.menu_id','=','menus.menu_id')
+                        ->join('users','role_menus.role_id','=','users.role_id')
+                        ->where('users.id',auth()->id())->get();
+
+        return view('/home',[
+            'allMenu' => $allMenu,
+      ]);
     }
+    
 }
