@@ -28,11 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         //$allMenu = menu::where('parent_menu_id','=',$param1)->get();
-        $allMenu = DB::table('role_menus')
-                        ->join('menus','role_menus.menu_id','=','menus.menu_id')
-                        ->join('users','role_menus.role_id','=','users.role_id')
-                        ->where('users.id',auth()->id())->get();
-
+        $allMenu = DB::table('role_menus')->join('menus','role_menus.menu_id','=','menus.menu_id')->join('users','role_menus.div_id','=','users.div_id')->where('users.id',auth()->id())->get();
         return view('/home',[
             'allMenu' => $allMenu,
       ]);

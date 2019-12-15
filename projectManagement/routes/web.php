@@ -21,7 +21,35 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/tes/{menu}', 'test@getMenu');
-Route::get('/tes/{menu}', 'test@getMenu');
+Route::get('/tes aja',function () {
+    return view('example');
+});
 Route::get('/example',function () {
     return view('example');
+});
+
+Route::get('/example2',function () {
+    return view('example2');
+});
+Route::get('/example3',function () {
+    return view('example3');
+});
+
+Route::prefix('user')->group(function (){
+    
+    Route::get('/','UserController@index');
+    Route::get('/view user','UserController@index');
+    Route::get('/create user','UserController@registerNew');
+    Route::get('/detail user/{id}','UserController@detail');
+    Route::get('/edit user/{id}','UserController@viewEdit');
+    Route::post('/edit user','UserController@editUser');
+});
+
+Route::prefix('division')->group(function(){
+    Route::get('/','DivisionController@index');
+    Route::get('/view division','DivisionController@index');
+    Route::get('/create division','DivisionController@registerNew');
+    Route::get('/detail division/{id}','DivisionController@detail');
+    Route::get('/edit division/{id}','DivisionController@viewEdit');
+    Route::post('/edit division','DivisionController@editDivision');
 });

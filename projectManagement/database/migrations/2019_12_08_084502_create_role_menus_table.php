@@ -15,11 +15,11 @@ class CreateRoleMenusTable extends Migration
     {
         Schema::create('role_menus', function (Blueprint $table) {
             $table->bigIncrements('role_menu_id');
-            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('div_id');
             $table->unsignedBigInteger('menu_id');
             $table->timestamps();
             
-            $table->foreign('role_id')->references('role_id')->on('roles');
+            $table->foreign('div_id')->references('div_id')->on('divisions');
             $table->foreign('menu_id')->references('menu_id')->on('menus');
         });
     }

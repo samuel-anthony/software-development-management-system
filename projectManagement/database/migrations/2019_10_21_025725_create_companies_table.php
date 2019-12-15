@@ -13,10 +13,10 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
-            $table->bigIncrements('comp_id');
-			$table->string('comp_name');
-			$table->string('comp_email');
+        Schema::create('clients', function (Blueprint $table) {
+            $table->bigIncrements('cl_id');
+			$table->string('cl_name');
+			$table->string('cl_email');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('clients');
     }
 }

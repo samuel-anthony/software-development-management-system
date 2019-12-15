@@ -23,9 +23,8 @@ class test extends Controller
         'allMenu' => $allMenu,
       ]);
     }*/
-    public function getMenu($param1)
+    public function getMenu($param1,$param2)
     {
-        //$allMenu = menu::where('parent_menu_id','=',$param1)->get();
         $allMenu = menu::parentMenuId($param1)->get();
               
         return view('/layouts/customlayout',[

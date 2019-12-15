@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','role_id'
+        'first_name','last_name', 'email', 'password','div_id','phone','user_name'
     ];
 
     /**
@@ -41,7 +41,7 @@ class User extends Authenticatable
         return $query->whereId($param);
     }
 
-    public function roles(){
-        return $this->hasMany(role::class);
+    public function divisions(){
+        return $this->hasMany('App\division','div_id');
     }
 }
