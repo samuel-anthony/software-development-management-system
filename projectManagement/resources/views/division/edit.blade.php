@@ -7,7 +7,7 @@
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Detail Profile</h5>
+                <h5 class="title">Edit Division</h5>
               </div>
               <div class="card-body">
                 <form method="POST" action="/division/edit division">

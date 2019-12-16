@@ -53,8 +53,11 @@ class DivisionController extends Controller
     public function detail($param1){
         if($this->isAdmin){
             $division = division::find($param1);
+            $menugrantedId = role_menu::divId($param1)->get('menu_id');
+            $grantedMenus = menu::find($menugrantedId);
             return view('/division/detail',[
                 'allMenu'=> $this->allMenu,
+                'grantedMenus'=> $grantedMenus,
                 'prefix'=>$this->prefix,
                 'menuName'=>$this->menuName,
                 'division' => $division

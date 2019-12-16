@@ -7,7 +7,7 @@
           <div class="col-md-8">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Detail Profile</h5>
+                <h5 class="title">Detail Division</h5>
               </div>
               <div class="card-body">
                 <form method="GET" action="/division/edit division/{{$division->div_id}}">
@@ -30,7 +30,11 @@
                     <div class="col-md-12 pr-1">
                       <div class="form-group">
                         <label>Menu Granted</label><br>
-                        <label class="checkbox"><input type="checkbox" for="menu[]" value="{{$division->div_id}}">{{$division->div_name}}</label>
+                        <ul>
+                        @for($counter = 0;$counter < count($grantedMenus); $counter++)
+                          <li><label>{{$grantedMenus[$counter]['menu_name']}}</label></li>
+                        @endfor
+                        </ul>
                       </div>
                     </div>
                   </div> 
