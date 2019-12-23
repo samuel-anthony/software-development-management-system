@@ -4,8 +4,8 @@
   <div class="container">
       <div class="row justify-content-center">
           <div class="col-md-10">
-              <div class="card">
-              <div class="card-header text-center"><h3 class="font-weight-bold">User List</h3></div>
+              <div class="card py-3 px-4">
+              <div class="card-header text-center"><h3 class="font-weight-bold">List Of User</h3></div>
                   <div class="card-body">
                       <div class="table-responsive">
                           <table class="table">
@@ -20,7 +20,7 @@
                                     <tr>
                                         <td>{{$user->user_name}}</td>
                                         <td>{{$user->email}}</td>
-                                        <td>{{$user->divisions[0]['div_name']}}</td>
+                                        <td>{{$user->division['div_name']}}</td>
                                         <td class="text-center">
                                             <a href='{{$prefix}}/detail user/{{$user->id}}'><button type="submit" class="btn btn-primary">View</button></a>
                                             <a href='{{$prefix}}/edit user/{{$user->id}}'><button type="submit" class="btn btn-primary">Edit</button></a>
