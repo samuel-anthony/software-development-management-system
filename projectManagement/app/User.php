@@ -41,7 +41,7 @@ class User extends Authenticatable
         return $query->whereId($param);
     }
 
-    public function divisions(){
-        return $this->hasMany('App\division','div_id');
+    public function division(){
+        return $this->hasOne('App\division','div_id','div_id');
     }
 }

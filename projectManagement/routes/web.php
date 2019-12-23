@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('auth/login');
+    return redirect('login');
 });
 
 Route::get('/createUser','Auth\RegisterController@registerNew');
@@ -43,6 +43,7 @@ Route::prefix('user')->group(function (){
     Route::get('/detail user/{id}','UserController@detail');
     Route::get('/edit user/{id}','UserController@viewEdit');
     Route::post('/edit user','UserController@editUser');
+    Route::post('/add user','UserController@addUser');
 });
 
 Route::prefix('division')->group(function(){
@@ -52,4 +53,15 @@ Route::prefix('division')->group(function(){
     Route::get('/detail division/{id}','DivisionController@detail');
     Route::get('/edit division/{id}','DivisionController@viewEdit');
     Route::post('/edit division','DivisionController@editDivision');
+});
+
+Route::prefix('admin')->group(function(){
+    Route::get('/',function () {return redirect('user');});
+});
+
+Route::prefix('hoa')->group(function(){
+    Route::get('/','HoaController@index');
+    Route::get('/detail/{id}','HoaController@detail');
+    Route::post('/user/approve','HoaController@userApprove');
+    Route::post('/user/disapprove','HoaController@userDisapprove');
 });

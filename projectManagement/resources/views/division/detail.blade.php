@@ -15,13 +15,13 @@
                     <div class="col-md-3 pr-1">
                       <div class="form-group">
                         <label>Division ID</label>  
-                        <input type="text" class="form-control" disabled="" placeholder="Company" value="{{$division->div_id}}">
+                        <input type="text" class="form-control" disabled value="{{$division->div_id}}">
                       </div>
                     </div>
                     <div class="col-md-5 px-1">
                       <div class="form-group">
                         <label>Division Name</label>
-                        <input type="text" class="form-control" disabled="" placeholder="Username" value="{{$division->div_name}}">
+                        <input type="text" class="form-control" disabled value="{{$division->div_name}}">
                       </div>
                     </div>
 

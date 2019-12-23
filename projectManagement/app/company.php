@@ -11,6 +11,6 @@ class company extends Model
     }
 
     public function projects(){
-        return $this->belongsTo(project::class);
+        return $this->hasMany('App\projects','cl_id','cl_id');
     }
 }
