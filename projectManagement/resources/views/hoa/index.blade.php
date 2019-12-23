@@ -15,35 +15,36 @@
                   <table class="table">
                     <thead class=" text-primary">
                       <th>
-                        User
+                        No.
                       </th>
                       <th>
-                        Email
+                        Action Type
                       </th>
                       <th>
-                        Division
+                        Detail
                       </th>
                       <th class="text-center">
                         Action
                       </th>
                     </thead>
                     <tbody>
-                    @foreach ($users as $user)
+                    @php($num = 1)
+                    @foreach ($requestAdmins as $requestAdmin)
                         <tr>
-                            <td>{{$user->user_name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->division['div_name']}}</td>
+                            <td>{{$num}}</td>
+                            <td>{{$requestAdmin->type}}</td>
+                            <td>Username : {{$requestAdmin->data->user_name}}, email : {{$requestAdmin->data->email}}</td>
                             <td class="text-center">
-                              <a href='{{$prefix}}/detail user/{{$user->id}}'><button type="submit" class="btn btn-primary">View</button></a>
-                              <a href='{{$prefix}}/edit user/{{$user->id}}'><button type="submit" class="btn btn-primary">Edit</button></a>
+                              <a href='{{$prefix}}/detail/{{$requestAdmin->id}}'><button type="submit" class="btn btn-primary">View</button></a>
                             </td>
+                            @php($num++)
                         </tr>    
                     @endforeach
                       
                     </tbody>
                   </table>
 
-                  {{ $users->links() }}
+
                 </div>
               </div>
             </div>

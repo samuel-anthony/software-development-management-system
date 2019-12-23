@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class project extends Model
 {
     
-    public function companies(){
-        return $this->hasMany(company::class);
+    public function client(){
+        return $this->belongsTo('App\company','cl_id','cl_id');
     }
 }

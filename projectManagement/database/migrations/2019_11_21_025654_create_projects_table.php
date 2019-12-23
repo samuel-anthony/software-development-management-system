@@ -18,10 +18,11 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('cl_id');
             $table->date('start_date');
             $table->date('due_date');
+            $table->unsignedBigInteger('user_id');
             $table->string('requirement')->nullable();
             $table->timestamps();
             
-            $table->string('user_id')->references('user_id')->on('users')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->nullable();
             $table->foreign('cl_id')->references('cl_id')->on('clients');
         });
     }

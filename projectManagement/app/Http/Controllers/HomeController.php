@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\menu;
 use App\role_menu;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
@@ -15,23 +16,20 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+
+    private $role;//role teh division
+    public function __construct(Request $request)
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+    private function getRole(){
+        $this->role = User::find(auth()->id())->division->div_name;
+    }
     public function index()
     {
-        //$allMenu = menu::where('parent_menu_id','=',$param1)->get();
-        $allMenu = DB::table('role_menus')->join('menus','role_menus.menu_id','=','menus.menu_id')->join('users','role_menus.div_id','=','users.div_id')->where('users.id',auth()->id())->get();
-        return view('/home',[
-            'allMenu' => $allMenu,
-      ]);
+        $this->getRole();
+        return redirect($this->role);
     }
     
 }
