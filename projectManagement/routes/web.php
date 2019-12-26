@@ -61,7 +61,23 @@ Route::prefix('admin')->group(function(){
 
 Route::prefix('hoa')->group(function(){
     Route::get('/','HoaController@index');
+    Route::get('/report','HoaController@report');
     Route::get('/detail/{id}','HoaController@detail');
     Route::post('/user/approve','HoaController@userApprove');
     Route::post('/user/disapprove','HoaController@userDisapprove');
+});
+
+
+Route::prefix('sales')->group(function(){
+    Route::get('/','SalesController@index');
+});
+
+
+Route::prefix('marketing')->group(function(){
+    Route::get('/','MarketingController@index');
+});
+
+
+Route::prefix('design')->group(function(){
+    Route::get('/','DesignController@index');
 });

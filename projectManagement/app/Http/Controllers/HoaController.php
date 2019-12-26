@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class HoaController extends Controller
 {
     //
-    private $prefix = 'hoa';
+    private $prefix = '/hoa';
     private $parentId = 2;
     public function __construct()
     {   
@@ -35,6 +35,20 @@ class HoaController extends Controller
             return redirect('home');
         
     }
+    public function report(){
+        $this->getRole();
+        $requestAdmins = requestAdmin::all();
+        for($c = 0; $c < count($requestAdmins); $c++){
+            $requestAdmins[$c]->data = json_decode($requestAdmins[$c]->data);
+        }
+        if($this->Hoa)
+            return view('hoa.report',[
+                'allMenu'=> $this->allMenu,
+                'requestAdmins'=>$requestAdmins,
+                'prefix'=>$this->prefix]);
+        else
+            return redirect('home');
+    }
     public function detail($param){
         $detail = requestAdmin::find($param);
         $detail->data = json_decode($detail->data);
@@ -46,5 +60,17 @@ class HoaController extends Controller
             'detail'=>$detail,
             'oldData'=>$oldData,
             'prefix'=>$this->prefix]);
+    }
+    public function userApprove(Request $request){
+        if(request('type')=='edit_user'){
+            
+        }
+        else if(request('type')=='add_user'){
+
+        }
+    }
+    public function userDisapprove(Request $request){
+        requestAdmin::find(request('id'))->delete();
+        return redirect('home');
     }
 }

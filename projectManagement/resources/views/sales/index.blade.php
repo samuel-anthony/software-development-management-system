@@ -28,24 +28,9 @@
                       </th>
                     </thead>
                     <tbody>
-                    @if(count($requestAdmins)>0)
-                      @php($num = 1)
-                      @foreach ($requestAdmins as $requestAdmin)
-                          <tr>
-                              <td>{{$num}}</td>
-                              <td>{{$requestAdmin->type}}</td>
-                              <td>Username : {{$requestAdmin->data->user_name}}, email : {{$requestAdmin->data->email}}</td>
-                              <td class="text-center">
-                                <a href='{{$prefix}}/detail/{{$requestAdmin->id}}'><button type="submit" class="btn btn-primary">View</button></a>
-                              </td>
-                              @php($num++)
-                          </tr>    
-                      @endforeach
-                    @else
                       <tr>
                         <td colspan="4" class="text-center">Records Not Found</td>
                       </tr>
-                    @endif
                     </tbody>
                   </table>
 
