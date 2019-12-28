@@ -46,7 +46,7 @@
                                 <label>Client</label>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control @error('cl_name') is-invalid @enderror"
+                                <input type="text" id="clientName" class="form-control @error('cl_name') is-invalid @enderror"
                                     name="cl_name" value="{{old('cl_name')}}">
                                 @error('cl_name')
                                 <span class="invalid-feedback" role="alert">
@@ -66,7 +66,7 @@
                                 <label>E-mail</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" id="" class="form-control @error('cl_email') is-invalid @enderror"
+                                <input type="text" id="clientEmail" class="form-control @error('cl_email') is-invalid @enderror"
                                     name="cl_email" value="{{old('cl_email')}}">
                                 @error('cl_email')
                                 <span class="invalid-feedback" role="alert">
@@ -156,7 +156,7 @@
                             @foreach($clients as $client)
                                 <tr>
                                     <td>{{$num}}.</td>
-                                    <td><a href="">{{$client->cl_name}}</a></td>
+                                    <td><a class="getValue" href="" data-client="{{$client->cl_name}}" data-email="{{$client->cl_email}}" data-dismiss="modal">{{$client->cl_name}}</a></td>
                                     <td>{{$client->cl_email}}</td>
                                 </tr>
                                 @php($num++)

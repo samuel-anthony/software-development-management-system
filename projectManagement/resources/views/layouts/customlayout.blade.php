@@ -177,6 +177,12 @@
             $("#datepicker4").datepicker();
         });
 
+        $(".getValue").on("click", function(){
+            var selectedClient = $(this).data('client');
+            var selectedEmail = $(this).data('email');
+            $("#clientName").val(selectedClient);
+            $("#clientEmail").val(selectedEmail);
+        });
     </script>
 </body>
 
