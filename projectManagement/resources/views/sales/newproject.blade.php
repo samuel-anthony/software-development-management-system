@@ -151,21 +151,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td><a href="">Client A</a></td>
-                            <td>client_a@email.com</td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td><a href="">Client B</a></td>
-                            <td>client_b@email.com</td>
-                        </tr>
-                        <tr>
-                            <td>03</td>
-                            <td><a href="">Client C</a></td>
-                            <td>client_c@email.com</td>
-                        </tr>
+                        @if(count($clients)>0)
+                            @php($num = 1)
+                            @foreach($clients as $client)
+                                <tr>
+                                    <td>{{$num}}.</td>
+                                    <td><a href="">{{$client->cl_name}}</a></td>
+                                    <td>{{$client->cl_email}}</td>
+                                </tr>
+                                @php($num++)
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="3" class="text-center">Records Not Found</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

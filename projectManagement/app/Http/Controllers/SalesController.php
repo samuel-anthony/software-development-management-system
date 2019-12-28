@@ -41,11 +41,13 @@ class SalesController extends Controller
     public function createNewProject(){
         $this->getRole();
         $marketings = User::whereDivId(4)->get();
+        $clients = client::all();
         if($this->Sales)
             return view('sales.newproject',[
                 'allMenu'=> $this->allMenu,
                 'prefix'=>$this->prefix,
-                'marketings'=>$marketings]);
+                'marketings'=>$marketings,
+                'clients'=>$clients]);
         else
             return redirect('home');
     }

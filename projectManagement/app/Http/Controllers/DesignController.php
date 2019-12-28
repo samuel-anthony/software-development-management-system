@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\project;
+use App\client;
+use App\progress;
 use Illuminate\Support\Facades\DB;
 
 class DesignController extends Controller
@@ -29,6 +32,31 @@ class DesignController extends Controller
                 'todos'=>$todos,
                 'progresses'=>$progresses,
                 'dones'=>$dones]);
+        else
+            return redirect('home');
+        
+    }
+
+    public function todo($param){
+        $this->getRole();
+        $todo = progress::where([['assignee_id',auth()->id()],['status_id',2]])->orWhere([['assignee_id', auth()->id()],['status_id','6']])->get();
+        if($this->Design)
+            return view('design.todo',[
+                'allMenu'=> $this->allMenu,
+                'prefix'=>$this->prefix,
+                'todo'=>$todo,]);
+        else
+            return redirect('home');
+        
+    }
+    public function progress($param){
+        $this->getRole();
+        $todo = progress::where([['assignee_id',auth()->id()],['status_id',2]])->orWhere([['assignee_id', auth()->id()],['status_id','6']])->get();
+        if($this->Design)
+            return view('design.progress',[
+                'allMenu'=> $this->allMenu,
+                'prefix'=>$this->prefix,
+                'todo'=>$todo,]);
         else
             return redirect('home');
         

@@ -48,9 +48,21 @@
                                 <th>Comment</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td colspan="3" class="text-center">Records Not Found</td>
-                                </tr>
+                                @if(count($progress->project->progresses)>0)
+                                    @php($num = 1)
+                                    @foreach($progress->project->progresses as $progress)
+                                        <tr>
+                                            <td>{{$num}}.</td>
+                                            <td>{{$progress->reporter->first_name}} {{$progress->reporter->last_name}}@if($progress->reporter->id == Auth::user()->id) (Me)@endif</td>
+                                            <td>{{$progress->comment}}</td>
+                                        </tr>
+                                        @php($num++)
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="3" class="text-center">Records Not Found</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
