@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectDetailsTable extends Migration
+class CreateProgressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,6 +19,7 @@ class CreateProjectDetailsTable extends Migration
             $table->unsignedBigInteger('reporter_id');
             $table->unsignedBigInteger('assignee_id');
             $table->unsignedBigInteger('status_id');
+            $table->string('comment');
             $table->timestamps();
             
             $table->foreign('proj_id')->references('proj_id')->on('projects');

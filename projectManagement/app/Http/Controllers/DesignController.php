@@ -19,10 +19,16 @@ class DesignController extends Controller
     }
     public function index(){
         $this->getRole();
+        $todos = progress::where([['assignee_id',auth()->id()],['status_id',2]])->orWhere([['assignee_id', auth()->id()],['status_id','6']])->get();
+        $progresses = progress::where([['reporter_id',auth()->id()],['status_id',2]])->get();
+        $dones = progress::where([['reporter_id',auth()->id()],['status_id',3]])->get();
         if($this->Design)
             return view('design.index',[
                 'allMenu'=> $this->allMenu,
-                'prefix'=>$this->prefix]);
+                'prefix'=>$this->prefix,
+                'todos'=>$todos,
+                'progresses'=>$progresses,
+                'dones'=>$dones]);
         else
             return redirect('home');
         

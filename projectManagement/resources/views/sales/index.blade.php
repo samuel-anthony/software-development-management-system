@@ -19,9 +19,22 @@
                                 <th>End</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td colspan="4" class="text-center">Records Not Found</td>
-                                </tr>
+                                @if(count($todos)>0)
+                                    @php($num = 1)
+                                    @foreach($todos as $task)
+                                        <tr>
+                                            <td>{{$num}}.</td>
+                                            <td><a href="{{$prefix}}/todo/{{$task->progress_id}}">{{$task->project->client->cl_name}}</a></td>
+                                            <td>{{$task->project->start_date}}</td>
+                                            <td>{{$task->project->due_date}}</td>
+                                        </tr>
+                                        @php($num++)
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="4" class="text-center">Records Not Found</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -35,9 +48,22 @@
                                 <th>End</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td colspan="4" class="text-center">Records Not Found</td>
-                                </tr>
+                                @if(count($progresses)>0)
+                                    @php($num = 1)
+                                    @foreach($progresses as $task)
+                                        <tr>
+                                            <td>{{$num}}.</td>
+                                            <td><a href="{{$prefix}}/progress/{{$task->progress_id}}">{{$task->project->client->cl_name}}</a></td>
+                                            <td>{{$task->project->start_date}}</td>
+                                            <td>{{$task->project->due_date}}</td>
+                                        </tr>
+                                        @php($num++)
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="4" class="text-center">Records Not Found</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -51,9 +77,22 @@
                                 <th>End</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td colspan="4" class="text-center">Records Not Found</td>
-                                </tr>
+                                @if(count($dones)>0)
+                                    @php($num = 1)
+                                    @foreach($dones as $task)
+                                        <tr>
+                                            <td>{{$num}}.</td>
+                                            <td><a href="{{$prefix}}/done/{{$task->progress_id}}">{{$task->project->client->cl_name}}</a></td>
+                                            <td>{{$task->project->start_date}}</td>
+                                            <td>{{$task->project->due_date}}</td>
+                                        </tr>
+                                        @php($num++)
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="4" class="text-center">Records Not Found</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>

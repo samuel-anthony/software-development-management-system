@@ -6,28 +6,28 @@
         <div class="col-md-10">
             <div class="card py-3 px-4">
                 <div class="card-header text-center">
-                    <h3 class="font-weight-bold">"Client Name"</h3>
+                    <h3 class="font-weight-bold">{{$todo->project->client->cl_name}}</h3>
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="first_name" class="col-md-4 col-form-label text-md-right">Start</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$todo->project->start_date}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="last_name" class="col-md-4 col-form-label text-md-right">End</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$todo->project->due_date}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="user_name" class="col-md-4 col-form-label text-md-right">Reporter</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$todo->reporter->first_name}} {{$todo->reporter->last_name}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">E-mail</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$todo->project->client->cl_email}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Requirement</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <textarea disabled class="col-md-4 form-control" style="border: solid 1px #ccc; border-radius: 20px;">{{$todo->project->requirement}}</textarea>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-md-6 text-center">

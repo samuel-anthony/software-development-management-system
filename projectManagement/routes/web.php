@@ -70,14 +70,25 @@ Route::prefix('hoa')->group(function(){
 
 Route::prefix('sales')->group(function(){
     Route::get('/','SalesController@index');
+    Route::get('/create new project','SalesController@createNewProject');
+    Route::get('/todo/{id}','SalesController@todo');
+    Route::get('/progress/{id}','SalesController@progress');
+    Route::get('/done/{id}','SalesController@done');
+    Route::post('/submitNewProject','SalesController@saveNewProject');
 });
 
 
 Route::prefix('marketing')->group(function(){
     Route::get('/','MarketingController@index');
+    Route::get('/todo/{id}','MarketingController@todo');
+    Route::get('/progress/{id}','MarketingController@progress');
+    Route::get('/done/{id}','MarketingController@done');
 });
 
 
 Route::prefix('design')->group(function(){
     Route::get('/','DesignController@index');
+    Route::get('/todo/{id}','DesignController@todo');
+    Route::get('/progress/{id}','DesignController@progress');
+    Route::get('/done/{id}','DesignController@done');
 });

@@ -44,4 +44,10 @@ class User extends Authenticatable
     public function division(){
         return $this->hasOne('App\division','div_id','div_id');
     }
+    public function reporter(){
+        return $this->belongsTo('App\progress','id','reporter_id');
+    }
+    public function assignee(){
+        return $this->belongsTo('App\progress','id','assignee_id');
+    }
 }

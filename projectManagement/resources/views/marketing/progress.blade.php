@@ -11,19 +11,19 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="first_name" class="col-md-4 col-form-label text-md-right">Start</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$progress->project->start_date}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="last_name" class="col-md-4 col-form-label text-md-right">End</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$progress->project->due_date}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">E-mail</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$progress->project->client->cl_name}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Reporter</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$progress->reporter->first_name}} {{$progress->reporter->last_name}}@if($progress->reporter->id == Auth::user()->id)(ME)@endif</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Requirement</label>
