@@ -129,6 +129,21 @@
             <div class="panel-header panel-header-sm"> </div>
             <div class="content">
                 <div class="row">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                @if (session('alertSuccess'))
+                                <div class="alert alert-success">
+                                    {{ session('alert') }}
+                                </div>
+                                @elseif (session('alertError'))
+                                <div class="alert alert-danger">
+                                    {{ session('alert') }}
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                     @yield('content')
                 </div>
             </div>
@@ -149,12 +164,19 @@
     <script src="/assets/js/plugins/bootstrap-notify.js"></script>
     <script src="/assets/js/now-ui-dashboard.min.js?v=1.3.0" type="text/javascript"></script>
     <script>
-        $(document).ready(function() {
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(".alert").remove();
+            });
+        }, 2000);
+
+        $(document).ready(function () {
             $("#datepicker1").datepicker();
             $("#datepicker2").datepicker();
             $("#datepicker3").datepicker();
             $("#datepicker4").datepicker();
         });
+
     </script>
 </body>
 

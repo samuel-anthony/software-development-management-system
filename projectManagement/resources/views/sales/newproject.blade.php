@@ -16,11 +16,13 @@
                                 <label>Start Date</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" id="datepicker3" class="form-control @error('start_date') is-invalid @enderror" name="start_date" value="{{old('start_date')}}">
+                                <input type="text" id="datepicker3"
+                                    class="form-control @error('start_date') is-invalid @enderror" name="start_date"
+                                    value="{{old('start_date')}}">
                                 @error('start_date')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -29,11 +31,13 @@
                                 <label>End Date</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" id="datepicker4" class="form-control @error('due_date') is-invalid @enderror" name="due_date" value="{{old('due_date')}}">
+                                <input type="text" id="datepicker4"
+                                    class="form-control @error('due_date') is-invalid @enderror" name="due_date"
+                                    value="{{old('due_date')}}">
                                 @error('due_date')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -41,13 +45,20 @@
                             <div class="col-md-2">
                                 <label>Client</label>
                             </div>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control @error('cl_name') is-invalid @enderror" name="cl_name" value="{{old('cl_name')}}">  
+                            <div class="col-md-6">
+                                <input type="text" class="form-control @error('cl_name') is-invalid @enderror"
+                                    name="cl_name" value="{{old('cl_name')}}">
                                 @error('cl_name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
+                            </div>
+                            <div class="col-md-1 p-0">
+                                <button type="button" class="btn btn-sm btn-info my-1 mx-0" data-toggle="modal"
+                                    data-target="#listOfClient">
+                                    ...
+                                </button>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -55,11 +66,12 @@
                                 <label>E-mail</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" id="" class="form-control @error('cl_email') is-invalid @enderror" name="cl_email" value="{{old('cl_email')}}">
+                                <input type="text" id="" class="form-control @error('cl_email') is-invalid @enderror"
+                                    name="cl_email" value="{{old('cl_email')}}">
                                 @error('cl_email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -68,16 +80,18 @@
                                 <label>Assignee</label>
                             </div>
                             <div class="col-md-7">
-                                <select class="form-control custom-select @error('user_id') is-invalid @enderror" name="user_id">
+                                <select class="form-control custom-select @error('user_id') is-invalid @enderror"
+                                    name="user_id">
                                     <option value="">Choose</option>
                                     @foreach($marketings as $marketing)
-                                        <option value="{{$marketing->id}}">{{$marketing->first_name}} {{$marketing->last_name}}</option>
+                                    <option value="{{$marketing->id}}">{{$marketing->first_name}}
+                                        {{$marketing->last_name}}</option>
                                     @endforeach
                                 </select>
                                 @error('user_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -86,11 +100,13 @@
                                 <label>Requirement</label>
                             </div>
                             <div class="col-md-7">
-                                <textarea class="col-md-5 form-control @error('requirement') is-invalid @enderror" rows="4" cols="50" name="requirement" style="border: solid 1px #ccc; border-radius: 20px;">{{old('requirement')}}</textarea>
+                                <textarea class="col-md-5 form-control @error('requirement') is-invalid @enderror"
+                                    rows="4" cols="50" name="requirement"
+                                    style="border: solid 1px #ccc; border-radius: 20px;">{{old('requirement')}}</textarea>
                                 @error('requirement')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -99,7 +115,8 @@
                                 <label>Comment</label>
                             </div>
                             <div class="col-md-7">
-                                <textarea class="col-md-5 form-control" rows="4" cols="50" name="comment" style="border: solid 1px #ccc; border-radius: 20px;max-height:120px;">{{old('comment')}}</textarea>
+                                <textarea class="col-md-5 form-control" rows="4" cols="50" name="comment"
+                                    style="border: solid 1px #ccc; border-radius: 20px;max-height:120px;">{{old('comment')}}</textarea>
                             </div>
                         </div>
                         <div class="row justify-content-center">
@@ -109,6 +126,48 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="listOfClient" tabindex="-1" role="dialog" aria-labelledby="listOfClientTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="listOfClientTitle">List Of Client</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Client</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>01</td>
+                            <td><a href="">Client A</a></td>
+                            <td>client_a@email.com</td>
+                        </tr>
+                        <tr>
+                            <td>02</td>
+                            <td><a href="">Client B</a></td>
+                            <td>client_b@email.com</td>
+                        </tr>
+                        <tr>
+                            <td>03</td>
+                            <td><a href="">Client C</a></td>
+                            <td>client_c@email.com</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

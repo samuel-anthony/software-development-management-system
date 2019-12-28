@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Requirement</label>
-                        <textarea disabled class="col-md-4 form-control" style="border: solid 1px #ccc; border-radius: 20px;">{{$todo->project->requirement}}</textarea>
+                        <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label><textarea disabled class="col-md-4 form-control" style="border: solid 1px #ccc; border-radius: 20px;">{{$todo->project->requirement}}</textarea>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-md-6 text-center">
