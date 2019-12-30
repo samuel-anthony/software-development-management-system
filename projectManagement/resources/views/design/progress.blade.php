@@ -6,7 +6,7 @@
         <div class="col-md-10">
             <div class="card py-3 px-4">
                 <div class="card-header text-center">
-                    <h3 class="font-weight-bold">"Client Name"</h3>
+                    <h3 class="font-weight-bold">{{$progress->client->cl_name}}</h3>
                 </div>
                 <div class="card-body">
                     <div class="form-group row">

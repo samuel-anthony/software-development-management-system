@@ -22,9 +22,9 @@ class MarketingController extends Controller
     }
     public function index(){
         $this->getRole();
-        $todos = project::whereIn('status_id',[2,10])->whereHas('progresses',function($query){$query->where('assignee_id',auth()->id());})->get();
+        $todos = project::whereIn('status_id',[1,2,10])->whereHas('progresses',function($query){$query->where('assignee_id',auth()->id());})->get();
         $progresses = project::whereIn('status_id',[3,4,11])->whereHas('progresses',function($query){$query->where('assignee_id',auth()->id());})->get();
-        $dones = project::whereNotIn('status_id',[2,3,4,10,11])->whereHas('progresses',function($query){$query->where('assignee_id',auth()->id());})->get();
+        $dones = project::whereNotIn('status_id',[1,2,3,4,10,11])->whereHas('progresses',function($query){$query->where('assignee_id',auth()->id());})->get();
         if($this->Marketing)
             return view('marketing.index',[
                 'allMenu'=> $this->allMenu,
@@ -50,6 +50,7 @@ class MarketingController extends Controller
     public function progress($param){
         $this->getRole();
         $progress = project::whereProjId($param)->first();
+        $progress->reassign = count(progress::whereProjId($param)->whereReporterId(auth()->id())->whereAssigneeId(null)->get())==1;
         $desginers = User::whereDivId(5)->get();
         if($this->Marketing)
             return view('marketing.progress',[

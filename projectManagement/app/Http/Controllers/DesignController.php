@@ -22,9 +22,9 @@ class DesignController extends Controller
     }
     public function index(){
         $this->getRole();
-        $todos = progress::where([['assignee_id',auth()->id()],['status_id',2]])->orWhere([['assignee_id', auth()->id()],['status_id','6']])->get();
-        $progresses = progress::where([['reporter_id',auth()->id()],['status_id',2]])->get();
-        $dones = progress::where([['reporter_id',auth()->id()],['status_id',3]])->get();
+        $todos = project::whereIn('status_id',[4,8])->whereHas('progresses',function($query){$query->where('assignee_id',auth()->id());})->get();
+        $progresses = project::whereIn('status_id',[5,9])->whereHas('progresses',function($query){$query->where('assignee_id',auth()->id());})->get();
+        $dones = project::whereNotIn('status_id',[4,5,8,9])->whereHas('progresses',function($query){$query->where('assignee_id',auth()->id());})->get();
         if($this->Design)
             return view('design.index',[
                 'allMenu'=> $this->allMenu,
@@ -39,26 +39,63 @@ class DesignController extends Controller
 
     public function todo($param){
         $this->getRole();
-        $todo = progress::where([['assignee_id',auth()->id()],['status_id',2]])->orWhere([['assignee_id', auth()->id()],['status_id','6']])->get();
+        $todo = project::whereProjId($param)->first();
+        $index = 0;
+        foreach($todo->progresses as $task){
+            if($task->assignee_id == auth()->id()){
+                break;
+            }
+            $index++;
+        }
         if($this->Design)
             return view('design.todo',[
                 'allMenu'=> $this->allMenu,
                 'prefix'=>$this->prefix,
-                'todo'=>$todo,]);
+                'todo'=>$todo,
+                'index'=>$index]);
         else
             return redirect('home');
         
     }
     public function progress($param){
         $this->getRole();
-        $todo = progress::where([['assignee_id',auth()->id()],['status_id',2]])->orWhere([['assignee_id', auth()->id()],['status_id','6']])->get();
+        $progress = project::whereProjId($param)->first();
+        $index = 0;
+        foreach($progress->progresses as $task){
+            if($task->assignee_id == auth()->id()){
+                break;
+            }
+            $index++;
+        }
         if($this->Design)
             return view('design.progress',[
                 'allMenu'=> $this->allMenu,
                 'prefix'=>$this->prefix,
-                'todo'=>$todo,]);
+                'progress'=>$progress,
+                'index'=>$index]);
         else
             return redirect('home');
         
+    }
+    public function approve(){
+        $progress = progress::whereProgressId(request('id'))->first();
+        $progress->project->status_id = 5;
+        $progress->project->save();
+        return redirect('home');
+    }
+    public function disapprove(){
+        $progress = progress::whereProgressId(request('id'))->first();
+        $progress->project->status_id = 1;
+        $progress->assignee_id = null;
+        $progress->save();
+        $progress->project->save();
+        $newProgress = new progress;
+        $newProgress->proj_id = $progress->proj_id;
+        $newProgress->reporter_id = auth()->id();
+        $newProgress->assignee_id = $progress->reporter_id;
+        $newProgress->comment = 'sorry i reject';
+        $newProgress->save();
+        
+        return redirect('home');
     }
 }

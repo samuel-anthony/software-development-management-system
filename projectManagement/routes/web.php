@@ -95,4 +95,6 @@ Route::prefix('design')->group(function(){
     Route::get('/todo/{id}','DesignController@todo');
     Route::get('/progress/{id}','DesignController@progress');
     Route::get('/done/{id}','DesignController@done');
+    Route::post('/approve','DesignController@approve');
+    Route::post('/disapprove','DesignController@disapprove');
 });
