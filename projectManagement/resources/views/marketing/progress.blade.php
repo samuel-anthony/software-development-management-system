@@ -11,40 +11,58 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="first_name" class="col-md-4 col-form-label text-md-right">Start</label>
-                        <label class="col-md-8 col-form-label">: {{$progress->project->start_date}}</label>
+                        <label class="col-md-8 col-form-label">: {{$progress->start_date}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="last_name" class="col-md-4 col-form-label text-md-right">End</label>
-                        <label class="col-md-8 col-form-label">: {{$progress->project->due_date}}</label>
+                        <label class="col-md-8 col-form-label">: {{$progress->due_date}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">E-mail</label>
-                        <label class="col-md-8 col-form-label">: {{$progress->project->client->cl_name}}</label>
+                        <label class="col-md-8 col-form-label">: {{$progress->client->cl_name}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Reporter</label>
-                        <label class="col-md-8 col-form-label">: {{$progress->reporter->first_name}} {{$progress->reporter->last_name}}@if($progress->reporter->id == Auth::user()->id)(ME)@endif</label>
+                        <label class="col-md-8 col-form-label">: {{$progress->progresses[0]->reporter->first_name}} {{$progress->progresses[0]->reporter->last_name}}@if($progress->progresses[0]->reporter->id == Auth::user()->id)(ME)@endif</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Requirement</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$progress->requirement}}</label>
                     </div>
-                    <form method="POST" action="">
+                    <form method="POST" action="{{$prefix}}/submitProgress">
+                        @csrf
+                        <input name="proj_id" value="{{$progress->proj_id}}" style="display:none">
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">Assignee</label>
-                            <select class="col-md-3 form-control custom-select" for="" name="">
-                                <option value="1">Satu</option>
-                                <option value="2">Dua</option>
-                                <option value="3">Tiga</option>
+                            <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label>
+                            <select class="col-md-3 form-control custom-select @error('assignee_id') is-invalid @enderror" name="assignee_id" id="">
+                                <option value="">Choose</option>
+                                @foreach($desginers as $designer)
+                                <option value="{{$designer->id}}">{{$designer->first_name}} {{$designer->last_name}}</option>
+                                @endforeach
                             </select>
+                            @error('assignee_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                        <div class="row">
+                        <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">Content</label>
-                            <input type="file" class="col-md-8 form-control-file" id="file" for="file" name="file">
+                            <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label>
+                            <textarea class="col-md-5 form-control @error('content') is-invalid @enderror" rows="4" cols="50" name="content"
+                                style="border: solid 1px #ccc; border-radius: 20px;"></textarea>
+                                
+                            @error('content')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">Comment</label>
-                            <textarea class="col-md-5 form-control" rows="4" cols="50" name="comment" form="usrform"
+                            <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label>
+                            <textarea class="col-md-5 form-control" rows="4" cols="50" name="comment"
                                 style="border: solid 1px #ccc; border-radius: 20px;"></textarea>
                         </div>
                         <div class="row justify-content-center">
@@ -52,7 +70,7 @@
                                 <button type="submit" class="btn btn-success">Submit</button>
                             </div>
                         </div>
-                    <form>
+                    </form>
                     <div class="table-responsive mt-5">
                         <table class="table">
                             <thead class=" text-primary">
@@ -61,9 +79,21 @@
                                 <th>Comment</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td colspan="3" class="text-center">Records Not Found</td>
-                                </tr>
+                                @if(count($progress->progresses)>0)
+                                    @php($num = 1)
+                                    @foreach($progress->progresses as $progress)
+                                        <tr>
+                                            <td>{{$num}}.</td>
+                                            <td>{{$progress->reporter->first_name}} {{$progress->reporter->last_name}}@if($progress->reporter->id == Auth::user()->id) (Me)@endif</td>
+                                            <td>{{$progress->comment}}</td>
+                                        </tr>
+                                        @php($num++)
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="3" class="text-center">Records Not Found</td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>

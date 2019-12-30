@@ -24,9 +24,10 @@ class SalesController extends Controller
     }
     public function index(){
         $this->getRole();
-        $todos = progress::where([['reporter_id',auth()->id()],['assignee_id',null]])->orWhere([['assignee_id', auth()->id()],['status_id','=','6']])->get();
-        $progresses = progress::where([['reporter_id',auth()->id()],['status_id',2]])->get();
-        $dones = progress::where([['reporter_id',auth()->id()],['status_id',3]])->get();
+        //project::whereHas('progresses',function($query){$query->where('assignee_id',auth());})
+        $todos = project::whereIn('status_id',[1,6])->whereHas('progresses',function($query){$query->where('reporter_id',auth()->id());})->get();
+        $progresses = project::whereIn('status_id',[2,7])->whereHas('progresses',function($query){$query->where('reporter_id',auth()->id());})->get();
+        $dones = project::whereNotIn('status_id',[1,2,6,7])->whereHas('progresses',function($query){$query->where('reporter_id',auth()->id());})->get();
         if($this->Sales)
             return view('sales.index',[
                 'allMenu'=> $this->allMenu,
@@ -53,21 +54,33 @@ class SalesController extends Controller
     }
     public function todo($param){
         $this->getRole();
-        $marketings = User::whereDivId(4)->get();
-        $todo = progress::whereProgressId($param)->first();
+        $todo = project::whereProjId($param)->first();
+        $rejector = [];
+        foreach($todo->progresses as $progress){
+            if($progress->reporter_id != auth()->id())
+                array_push($rejector,$progress->reporter_id);
+        }
+        $marketings = User::whereDivId(4)->whereNotIn('id',$rejector)->get();
         if($this->Sales){
-            return view('sales.todoreassign',[
-                'allMenu'=> $this->allMenu,
-                'prefix'=>$this->prefix,
-                'marketings'=>$marketings,
-                'todo'=>$todo]);
+            if($todo->status_id==1)
+                return view('sales.todoreassign',[
+                    'allMenu'=> $this->allMenu,
+                    'prefix'=>$this->prefix,
+                    'marketings'=>$marketings,
+                    'todo'=>$todo]);
+            else
+                return view('sales.todo',[
+                    'allMenu'=> $this->allMenu,
+                    'prefix'=>$this->prefix,
+                    'marketings'=>$marketings,
+                    'todo'=>$todo]);
         }
         else
             return redirect('home');
     }
     public function progress($param){
         $this->getRole();
-        $progress = progress::whereProgressId($param)->first();
+        $progress = project::whereProjId($param)->first();
         if($this->Sales)
             return view('sales.progress',[
                 'allMenu'=> $this->allMenu,
@@ -115,16 +128,32 @@ class SalesController extends Controller
         $project->due_date = DateTime::createFromFormat('Y-m-d', $date[2].'-'.$date[0].'-'.$date[1]);
         $project->requirement = request('requirement');
         $project->cl_id = $client->cl_id;
+        $project->status_id = 2;
         $project->save();
 
         $progress = new progress;
         $progress->proj_id = $project->proj_id;
         $progress->reporter_id = auth()->id();
         $progress->assignee_id = request('user_id');
-        $progress->status_id = 2;
         $progress->comment = request('comment');
         $progress->save();
 
         return redirect('sales')->with('alert','successfully add new project');
+    }
+    public function reassign(){
+        $validator = Validator::make(request()->input(), [
+            'user_id'=>'required',
+        ],[
+        ]);
+        if ($validator->fails()) {
+            $validator->validate();
+        }
+        $progress = progress::whereProjId(request('proj_id'))->first();
+        $progress->assignee_id = request('user_id');
+        $progress->save();
+        $project = project::whereProjId(request('proj_id'))->first();
+        $project->status_id = 2;
+        $project->save();
+        return redirect('home')->with('alert','successfull assign new marketing');
     }
 }

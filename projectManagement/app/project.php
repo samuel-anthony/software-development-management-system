@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class project extends Model
 {
     public $primaryKey = 'proj_id';
+    public function status(){
+        return $this->hasOne('App\status','status_id','status_id');
+    }
     public function client(){
         return $this->belongsTo('App\client','cl_id','cl_id');
     }

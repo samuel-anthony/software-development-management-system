@@ -24,9 +24,9 @@
                                     @foreach($todos as $task)
                                         <tr>
                                             <td>{{$num}}.</td>
-                                            <td><a href="{{$prefix}}/todo/{{$task->progress_id}}">{{$task->project->client->cl_name}}</a></td>
-                                            <td>{{$task->project->start_date}}</td>
-                                            <td>{{$task->project->due_date}}</td>
+                                            <td><a href="{{$prefix}}/todo/{{$task->proj_id}}">{{$task->client->cl_name}}</a></td>
+                                            <td>{{$task->start_date}}</td>
+                                            <td>{{$task->due_date}}</td>
                                         </tr>
                                         @php($num++)
                                     @endforeach
@@ -53,9 +53,9 @@
                                     @foreach($progresses as $task)
                                         <tr>
                                             <td>{{$num}}.</td>
-                                            <td><a href="{{$prefix}}/progress/{{$task->progress_id}}">{{$task->project->client->cl_name}}</a></td>
-                                            <td>{{$task->project->start_date}}</td>
-                                            <td>{{$task->project->due_date}}</td>
+                                            <td><a href="{{$prefix}}/progress/{{$task->proj_id}}">{{$task->client->cl_name}}</a></td>
+                                            <td>{{$task->start_date}}</td>
+                                            <td>{{$task->due_date}}</td>
                                         </tr>
                                         @php($num++)
                                     @endforeach
@@ -82,9 +82,9 @@
                                     @foreach($dones as $task)
                                         <tr>
                                             <td>{{$num}}.</td>
-                                            <td><a href="{{$prefix}}/done/{{$task->progress_id}}">{{$task->project->client->cl_name}}</a></td>
-                                            <td>{{$task->project->start_date}}</td>
-                                            <td>{{$task->project->due_date}}</td>
+                                            <td><a href="{{$prefix}}/done/{{$task->proj_id}}">{{$task->client->cl_name}}</a></td>
+                                            <td>{{$task->start_date}}</td>
+                                            <td>{{$task->due_date}}</td>
                                         </tr>
                                         @php($num++)
                                     @endforeach

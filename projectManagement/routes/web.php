@@ -75,6 +75,7 @@ Route::prefix('sales')->group(function(){
     Route::get('/progress/{id}','SalesController@progress');
     Route::get('/done/{id}','SalesController@done');
     Route::post('/submitNewProject','SalesController@saveNewProject');
+    Route::post('/reassign','SalesController@reassign');
 });
 
 
@@ -83,6 +84,9 @@ Route::prefix('marketing')->group(function(){
     Route::get('/todo/{id}','MarketingController@todo');
     Route::get('/progress/{id}','MarketingController@progress');
     Route::get('/done/{id}','MarketingController@done');
+    Route::post('/approve','MarketingController@approve');
+    Route::post('/disapprove','MarketingController@disapprove');
+    Route::post('/submitProgress','MarketingController@submitProgress');
 });
 
 

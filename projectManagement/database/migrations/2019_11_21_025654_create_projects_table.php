@@ -21,8 +21,10 @@ class CreateProjectsTable extends Migration
             $table->string('requirement')->nullable();
             $table->string('content')->nullable();
             $table->binary('media')->nullable();
+            $table->unsignedBigInteger('status_id');
             $table->timestamps();
             $table->foreign('cl_id')->references('cl_id')->on('clients');
+            $table->foreign('status_id')->references('status_id')->on('statuses');
         });
     }
 

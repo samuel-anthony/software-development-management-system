@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class progress extends Model
 {
+    public $primaryKey = 'progress_id';
     public function project(){
         return $this->belongsTo('App\project','proj_id','proj_id');
     }
