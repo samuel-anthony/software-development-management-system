@@ -23,8 +23,10 @@ class HoaController extends Controller
     public function index(){
         $this->getRole();
         $requestAdmins = requestAdmin::all();
+        $divisions = division::all();
         for($c = 0; $c < count($requestAdmins); $c++){
             $requestAdmins[$c]->data = json_decode($requestAdmins[$c]->data);
+            $requestAdmins[$c]->data->div_name = $divisions[$requestAdmins[$c]->data->div_id-1]->div_name;
         }
         if($this->Hoa)
             return view('hoa.index',[

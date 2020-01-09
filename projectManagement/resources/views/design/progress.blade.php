@@ -37,10 +37,17 @@
                         <label for="role" class="col-md-4 col-form-label text-md-right">Content</label>
                         <label class="col-md-8 col-form-label">: <a href="">text.txt</a></label>
                     </div>
-                    <form method="POST" action="">
+                    <form method="POST" action="{{$prefix}}/submitProgress" enctype="multipart/form-data">
+                        @csrf
+                        <input type="text"style="display:none" name="project_id" value="{{$progress->proj_id}}">
                         <div class="row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">Media</label>
-                            <input type="file" class="col-md-8 form-control-file" id="file" for="file" name="file">
+                            <input type="file" class="col-md-8 form-control-file @error('file') is-invalid @enderror" id="file" for="file" name="file">
+                            @error('file')
+                                <span class="invalid-feedback col-md-4 col-form-label" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">Comment</label>

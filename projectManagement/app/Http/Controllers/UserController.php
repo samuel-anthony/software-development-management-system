@@ -140,7 +140,6 @@ class UserController extends Controller
         $user->phone = $request->get('phone');
         $user->email = $request->get('email');
         $user->div_id = $request->get('role');
-        
         $requestAdmin = new requestAdmin;
         $requestAdmin->data = json_encode($user->getAttributes());
         $requestAdmin->type = 'add_user';

@@ -39,11 +39,24 @@ class MarketingController extends Controller
     public function todo($param){
         $this->getRole();
         $todo = project::whereProjId($param)->first();
+        $rejector = [];
+        foreach($todo->progresses as $progress){
+            if($progress->reporter_id != auth()->id())
+                array_push($rejector,$progress->reporter_id);
+        }
+        $designers = User::whereDivId(5)->whereNotIn('id',$rejector)->get();
         if($this->Marketing)
-            return view('marketing.todo',[
-                'allMenu'=> $this->allMenu,
-                'prefix'=>$this->prefix,
-                'todo'=>$todo]);
+            if($todo->status_id==1)
+                return view('sales.todoreassign',[
+                    'allMenu'=> $this->allMenu,
+                    'prefix'=>$this->prefix,
+                    'designers'=>$designers,
+                    'todo'=>$todo]);
+            else
+                return view('marketing.todo',[
+                    'allMenu'=> $this->allMenu,
+                    'prefix'=>$this->prefix,
+                    'todo'=>$todo]);
         else
             return redirect('home');
     }

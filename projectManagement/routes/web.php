@@ -20,6 +20,7 @@ Route::get('/createUser','Auth\RegisterController@registerNew');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/customLogin', 'CustomLoginController@login');
 Route::get('/tes/{menu}', 'test@getMenu');
 Route::get('/tes aja',function () {
     return view('example');
@@ -97,4 +98,5 @@ Route::prefix('design')->group(function(){
     Route::get('/done/{id}','DesignController@done');
     Route::post('/approve','DesignController@approve');
     Route::post('/disapprove','DesignController@disapprove');
+    Route::post('/submitProgress','DesignController@submitProgress');
 });

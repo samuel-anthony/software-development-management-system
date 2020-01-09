@@ -7,6 +7,7 @@ use App\User;
 use App\project;
 use App\client;
 use App\progress;
+use Validator;
 use Illuminate\Support\Facades\DB;
 
 class DesignController extends Controller
@@ -95,6 +96,25 @@ class DesignController extends Controller
         $newProgress->assignee_id = $progress->reporter_id;
         $newProgress->comment = 'sorry i reject';
         $newProgress->save();
+        
+        return redirect('home');
+    }
+
+    public function submitProgress(){
+        $validator = Validator::make(request()->file(), [
+			'file' => 'required|file|mimes:jpg,jpeg,png'
+        ],[
+            'file.mimes' => 'the upload must be in format of jpg, jpeg, png'
+        ]);
+        if ($validator->fails()) {
+            $validator->validate();
+        }
+        $project = project::whereProjId(request('project_id'))->first();
+        $path = request()->file('file')->getRealPath();
+        $image = file_get_contents($path);
+        $base64 = base64_encode($image);
+        $project->media = $base64;
+        $project->save();
         
         return redirect('home');
     }

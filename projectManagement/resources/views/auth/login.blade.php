@@ -8,13 +8,13 @@
                 <div class="card">
                     <div class="card-header"><i class="now-ui-icons users_single-02"></i>&nbsp;&nbsp;{{ __('Login') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="/customLogin">
                             @csrf
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right isRequired">{{ __('Email Address') }}</label>
+                                <label for="user_name" class="col-md-4 col-form-label text-md-right isRequired">User Name</label>
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                    @error('email')
+                                    <input id="user_name" type="user_name" class="form-control @error('user_name') is-invalid @enderror" name="user_name" value="{{ old('user_name') }}" required autocomplete="user_name" autofocus>
+                                    @error('user_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

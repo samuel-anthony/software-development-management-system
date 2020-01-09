@@ -28,8 +28,8 @@
                                     <td>Username : {{$requestAdmin->data->user_name}}, email :
                                         {{$requestAdmin->data->email}}
                                     </td>
+                                    <td>{{$requestAdmin->data->div_name}}</td>
                                     <td class="text-center">
-                                        <a href='{{$prefix}}/detail user/{{$user->id}}'><button type="submit" class="btn btn-primary">View</button></a>
                                         <a href='{{$prefix}}/detail/{{$requestAdmin->id}}'><button type="submit" class="btn btn-primary">View</button></a>
                                     </td>
                                     @php($num++)
