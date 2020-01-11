@@ -127,19 +127,22 @@ class UserController extends Controller
             'user_name' => 'required|unique:users|min:8|max:255',
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            'email' => 'required|email|unique:users'
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required_with:password|same:password'
         ]);
         if ($validator->fails()) {
             $validator->validate();
         }
 
-        $user = User::find($request->get('user_id'));
+        $user = new User;
         $user->user_name = $request->get('user_name');
         $user->first_name = $request->get('first_name');
         $user->last_name = $request->get('last_name');
         $user->phone = $request->get('phone');
         $user->email = $request->get('email');
         $user->div_id = $request->get('role');
+        $user->password = bcrypt($request->get('role'));
         $requestAdmin = new requestAdmin;
         $requestAdmin->data = json_encode($user->getAttributes());
         $requestAdmin->type = 'add_user';

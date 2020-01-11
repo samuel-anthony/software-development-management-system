@@ -64,12 +64,15 @@ class HoaController extends Controller
             'prefix'=>$this->prefix]);
     }
     public function userApprove(Request $request){
+        $detail = requestAdmin::find(request('id'));
+        $detail->data = json_decode($detail->data);
         if(request('type')=='edit_user'){
             
         }
         else if(request('type')=='add_user'){
 
         }
+        return redirect('home')->with('alertSuccess','data successfully approved');
     }
     public function userDisapprove(Request $request){
         requestAdmin::find(request('id'))->delete();

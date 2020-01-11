@@ -6,15 +6,15 @@
         <div class="col-md-10">
             <div class="card py-3 px-4">
                 <div class="card-header text-center">
-                    <h3 class="font-weight-bold">New User Request</h3>
+                    <h3 class="font-weight-bold">Admin Request List</h3>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
                                 <th>No.</th>
-                                <th>Name</th>
-                                <th>Username</th>
+                                <th>Request Type</th>
+                                <th>Brief data</th>
                                 <th>Division</th>
                                 <th class="text-center">Action</th>
                             </thead>
