@@ -60,6 +60,12 @@ class SalesController extends Controller
             if($progress->reporter_id != auth()->id())
                 array_push($rejector,$progress->reporter_id);
         }
+        $index = 0;
+        foreach($todo->progresses as $progress){
+            if($progress->reporter == $todo->progresses[0]->assignee)
+                break;
+            $index++;
+        }
         $marketings = User::whereDivId(4)->whereNotIn('id',$rejector)->get();
         if($this->Sales){
             if($todo->status_id==1)
@@ -72,8 +78,8 @@ class SalesController extends Controller
                 return view('sales.todo',[
                     'allMenu'=> $this->allMenu,
                     'prefix'=>$this->prefix,
-                    'marketings'=>$marketings,
-                    'todo'=>$todo]);
+                    'todo'=>$todo,
+                    'index'=>$index]);
         }
         else
             return redirect('home');
@@ -81,20 +87,41 @@ class SalesController extends Controller
     public function progress($param){
         $this->getRole();
         $progress = project::whereProjId($param)->first();
-        if($this->Sales)
+        $index = 0;
+        $assignee = [$progress->progresses[0]->assignee];
+        foreach($progress->progresses as $task){
+            if($task->reporter == $progress->progresses[0]->assignee){
+                array_push($assignee,$task->assignee);
+                break;
+            }
+            $index++;
+        }
+        $progress->assignee = $assignee;
+        if($this->Sales){
             return view('sales.progress',[
                 'allMenu'=> $this->allMenu,
                 'prefix'=>$this->prefix,
-                'progress'=>$progress]);
+                'progress'=>$progress,
+                'index'=>$index]);
+            }
         else
             return redirect('home');
     }
-    public function done(){
+    public function done($param){
         $this->getRole();
+        $done = project::whereProjId($param)->first();
+        $index = 0;
+        foreach($done->progresses as $progress){
+            if($progress->reporter == $done->progresses[0]->assignee)
+                break;
+            $index++;
+        }
         if($this->Sales)
             return view('sales.done',[
                 'allMenu'=> $this->allMenu,
-                'prefix'=>$this->prefix]);
+                'prefix'=>$this->prefix,
+                'done'=>$done,
+                'index'=>$index]);
         else
             return redirect('home');
     }
@@ -155,5 +182,53 @@ class SalesController extends Controller
         $project->status_id = 2;
         $project->save();
         return redirect('home')->with('alert','successfull assign new marketing');
+    }
+    public function review(){
+        $progress = project::whereProjId(request('proj_id'))->first();
+        $progress->status_id = 7;
+        $progress->save();
+        return $this->progress(request('proj_id'));
+    }
+    public function revision(){
+        $validator = Validator::make(request()->input(), [
+            'assignee_id'=>'required',
+        ],[
+            'assignee_id.required' => 'please choose who to you want ask to revise'
+        ]);
+        if ($validator->fails()) {
+            $validator->validate();
+        }
+        $project = project::whereProjId(request('proj_id'))->first();
+        $assignee = User::find(request('assignee_id'));
+        if($assignee->div_id == 4){
+            $project->status_id = 10;
+        }
+        else if($assignee->div_id == 5){
+            $project->status_id = 8;
+        }
+        $project->save();
+        $progress = new progress;
+        $progress->proj_id = $project->proj_id;
+        $progress->reporter_id = auth()->id();
+        $progress->assignee_id = request('assignee_id');
+        $progress->comment = request('comment');
+        $progress->save();
+        return $this->progress(request('proj_id'));
+    }
+    public function finishProject(){
+        $progress = project::whereProjId(request('proj_id'))->first();
+        $progress->status_id = 12;
+        $progress->save();
+        return redirect('home');    
+    }
+    public function download(){
+        $item = project::whereProjId(request('id'))->first(); 
+        $item->media = base64_decode($item->media);
+        return response($item->media)
+                        ->header('Cache-Control', 'no-cache private')
+                        ->header('Content-Description', 'File Transfer')
+                        ->header('Content-Type', $item->media_type)
+                        ->header('Content-Disposition', 'attachment; filename=download.jpg' )
+                        ->header('Content-Transfer-Encoding', 'binary');
     }
 }

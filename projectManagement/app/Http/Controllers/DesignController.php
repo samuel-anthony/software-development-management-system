@@ -78,6 +78,25 @@ class DesignController extends Controller
             return redirect('home');
         
     }
+    
+    public function done($param){
+        $this->getRole();
+        $done = project::whereProjId($param)->first();
+        $index = 0;
+        foreach($done->progresses as $progress){
+            if($progress->reporter == $done->progresses[0]->assignee)
+                break;
+            $index++;
+        }
+        if($this->Design)
+            return view('design.done',[
+                'allMenu'=> $this->allMenu,
+                'prefix'=>$this->prefix,
+                'done'=>$done,
+                'index'=>$index]);
+        else
+            return redirect('home');
+    }
     public function approve(){
         $progress = progress::whereProgressId(request('id'))->first();
         $progress->project->status_id = 5;
@@ -102,7 +121,7 @@ class DesignController extends Controller
 
     public function submitProgress(){
         $validator = Validator::make(request()->file(), [
-			'file' => 'required|file|mimes:jpg,jpeg,png'
+			'file' => 'required|file|mimes:jpg,jpeg,png|max:1024'
         ],[
             'file.mimes' => 'the upload must be in format of jpg, jpeg, png'
         ]);
@@ -114,8 +133,16 @@ class DesignController extends Controller
         $image = file_get_contents($path);
         $base64 = base64_encode($image);
         $project->media = $base64;
+        $project->media_type = $_FILES['file']['type'];
+        $project->status_id = 6;
         $project->save();
-        
+
+        $progress = new progress;
+        $progress->proj_id = $project->proj_id;
+        $progress->reporter_id = auth()->id();
+        $progress->assignee_id = $project->progresses[0]->reporter_id;
+        $progress->comment = request('comment');
+        $progress->save();
         return redirect('home');
     }
 }

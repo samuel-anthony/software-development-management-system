@@ -53,6 +53,7 @@ class HoaController extends Controller
     }
     public function detail($param){
         $detail = requestAdmin::find($param);
+        //dd($detail);
         $detail->data = json_decode($detail->data);
         $detail->data->division = division::whereDivId($detail->data->div_id)->first()->div_name;
         $oldData = User::find($detail->data->id);
@@ -72,6 +73,7 @@ class HoaController extends Controller
         else if(request('type')=='add_user'){
 
         }
+        requestAdmin::find(request('id'))->delete();
         return redirect('home')->with('alertSuccess','data successfully approved');
     }
     public function userDisapprove(Request $request){

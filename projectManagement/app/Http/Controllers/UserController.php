@@ -47,7 +47,7 @@ class UserController extends Controller
 
     public function registerNew(){
         $this->getRole();
-        $allRole = division::all();
+        $allRole = division::whereNotIn('div_id',[1,2])->get();
         return view('/user/register',[
             'allRole' => $allRole,
             'allMenu'=> $this->allMenu,

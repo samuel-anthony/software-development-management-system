@@ -77,6 +77,10 @@ Route::prefix('sales')->group(function(){
     Route::get('/done/{id}','SalesController@done');
     Route::post('/submitNewProject','SalesController@saveNewProject');
     Route::post('/reassign','SalesController@reassign');
+    Route::post('/download','SalesController@download');
+    Route::post('/review','SalesController@review');
+    Route::post('/finishProject','SalesController@finishProject');
+    Route::post('/revision','SalesController@revision');
 });
 
 

@@ -6,54 +6,51 @@
         <div class="col-md-10">
             <div class="card py-3 px-4">
                 <div class="card-header text-center">
-                    <h3 class="font-weight-bold">"Client Name"</h3>
+                    <h3 class="font-weight-bold">{{$todo->client->cl_name}}</h3>
                 </div>
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="first_name" class="col-md-4 col-form-label text-md-right">Start</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$todo->start_date}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="last_name" class="col-md-4 col-form-label text-md-right">End</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$todo->due_date}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">E-mail</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$todo->client->cl_email}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Requirement</label>
-                        <label class="col-md-8 col-form-label">: </label>
+                        <label class="col-md-8 col-form-label">: {{$todo->requirement}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Media</label>
-                        <div class="col-md-8">: <img src="" width="200" height="200" alt="Images 1"></div>
+                        <div class="col-md-8">: <a href=""onclick="event.preventDefault();document.getElementById('download').submit();">attachment</a></div>
+                        <form id="download" action="{{$prefix}}/download" method="POST" style="display: none;">@csrf<input type="text" name="id" value="{{$todo->proj_id}}" style="display:none"></form>
                     </div>
-                    <form method="POST" action="">
-                        <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">Assignee</label>
-                            <select class="col-md-3 form-control custom-select" for="" name="">
-                                <option value="1">Satu</option>
-                                <option value="2">Dua</option>
-                                <option value="3">Tiga</option>
-                            </select>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label text-md-right">Assignee</label>
+                        <div>
+                            <label class="col-md col-form-label">: 1. {{$todo->progresses[0]->assignee->first_name}} {{$todo->progresses[0]->assignee->last_name}}</label>
+                            <label class="col-md col-form-label">&nbsp; 2. {{$todo->progresses[$index]->assignee->first_name}} {{$todo->progresses[$index]->assignee->last_name}}</label>
+                        </div>    
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 text-center">
+                            <button type="submit" class="btn btn-success" onclick="event.preventDefault();document.getElementById('revise').submit();">Review</button>
+                            <button type="submit" class="btn btn-success" onclick="event.preventDefault();document.getElementById('done').submit();">Done</button>
                         </div>
-                        <div class="row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">Content</label>
-                            <input type="file" class="col-md-8 form-control-file" id="file" for="file" name="file">
-                        </div>
-                        <div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">Comment</label>
-                            <textarea class="col-md-5 form-control" rows="4" cols="50" name="comment" form="usrform"
-                                style="border: solid 1px #ccc; border-radius: 20px;"></textarea>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-md-6 text-center">
-                                <button type="submit" class="btn btn-success">Re-Assign</button>
-                                <button type="submit" class="btn btn-danger">Close</button>
-                            </div>
-                        </div>
-                    <form>
+                    </div>
+                    <form method="POST" action="{{$prefix}}/review" id="revise">
+                        @csrf
+                        <input type="text" name="proj_id" style="display:none" value="{{$todo->proj_id}}">
+                    </form>
+                    <form method="POST" action="{{$prefix}}/finishProject" id="done">
+                        @csrf
+                        <input type="text" name="proj_id" style="display:none" value="{{$todo->proj_id}}">
+                    </form>
                     <div class="table-responsive mt-5">
                         <table class="table">
                             <thead class=" text-primary">
@@ -62,9 +59,9 @@
                                 <th>Comment</th>
                             </thead>
                             <tbody>
-                                @if(count($progress->project->progresses)>0)
+                                @if(count($todo->progresses)>0)
                                     @php($num = 1)
-                                    @foreach($progress->project->progresses as $progress)
+                                    @foreach($todo->progresses as $progress)
                                         <tr>
                                             <td>{{$num}}.</td>
                                             <td>{{$progress->reporter->first_name}} {{$progress->reporter->last_name}}@if($progress->reporter->id == Auth::user()->id) (Me)@endif</td>

@@ -29,6 +29,7 @@
                         <label for="role" class="col-md-4 col-form-label text-md-right">Requirement</label>
                         <label class="col-md-8 col-form-label">: {{$progress->requirement}}</label>
                     </div>
+                    @if($progress->status_id !=7)        
                     <form method="GET" action="{{$prefix}}">
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">Assignee</label>
@@ -39,7 +40,46 @@
                                 <button type="submit" class="btn">back</button>
                             </div>
                         </div>
-                    <form>
+                    </form>
+                    @else
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">Assignee</label>
+                            <div>
+                                <label class="col-md-8 col-form-label">: {{$progress->progresses[0]->assignee->first_name}} {{$progress->progresses[0]->assignee->last_name}}@if($progress->progresses[0]->assignee->id == Auth::user()->id) (Me)@endif</label>
+                                <label class="col-md-8 col-form-label">: {{$progress->progresses[$index]->assignee->first_name}} {{$progress->progresses[$index]->assignee->last_name}}@if($progress->progresses[0]->assignee->id == Auth::user()->id) (Me)@endif</label>
+                            </div>
+                        </div>
+                        <form method="POST" action="{{$prefix}}/revision" id="review"><input type="text" style="display:none" value="{{$progress->proj_id}}" name="proj_id">
+                            @csrf
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label text-md-right">Ask Revision to </label>
+                                <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label>
+                                <select class="col-md-3 form-control custom-select @error('assignee_id') is-invalid @enderror" name="assignee_id" id="">
+                                    <option value="">Choose</option>
+                                    @foreach($progress->assignee as $assignee)
+                                        <option value="{{$assignee->id}}">{{$assignee->first_name}} {{$assignee->last_name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('assignee_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group row">
+                                <label for="role" class="col-md-4 col-form-label text-md-right">Comment</label>
+                                <textarea class="col-md-5 form-control" rows="4" cols="50" name="comment"
+                                        style="border: solid 1px #ccc; border-radius: 20px;">{{old('comment')}}</textarea>
+                            </div>
+                        </form>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 text-center">
+                                <button type="submit" class="btn btn-success" onclick="event.preventDefault();document.getElementById('review').submit();">Ask to Revise</button>
+                                <button type="submit" class="btn" onclick="event.preventDefault();document.getElementById('back').submit();">back</button>
+                            </div>
+                        </div>
+                    <form method="GET" action="{{$prefix}}" id="back"></form>
+                    @endif
                     <div class="table-responsive mt-5">
                         <table class="table">
                             <thead class=" text-primary">
