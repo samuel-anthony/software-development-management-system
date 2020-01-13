@@ -187,7 +187,7 @@ class SalesController extends Controller
         $progress = project::whereProjId(request('proj_id'))->first();
         $progress->status_id = 7;
         $progress->save();
-        return $this->progress(request('proj_id'));
+        return redirect('sales/progress/'.request('proj_id'));;
     }
     public function revision(){
         $validator = Validator::make(request()->input(), [
