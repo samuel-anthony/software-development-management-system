@@ -29,7 +29,10 @@ class HomeController extends Controller
     public function index()
     {
         $this->getRole();
-        return redirect($this->role);
+        if(is_null(session()->get('message')))
+            return redirect($this->role);
+        else
+            return redirect($this->role)->with(session('alert'),session('message'));
     }
     
 }

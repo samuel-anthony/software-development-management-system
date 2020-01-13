@@ -54,22 +54,27 @@
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label text-md-right">Ask Revision to </label>
                                 <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label>
-                                <select class="col-md-3 form-control custom-select @error('assignee_id') is-invalid @enderror" name="assignee_id" id="">
-                                    <option value="">Choose</option>
-                                    @foreach($progress->assignee as $assignee)
-                                        <option value="{{$assignee->id}}">{{$assignee->first_name}} {{$assignee->last_name}}</option>
-                                    @endforeach
-                                </select>
-                                @error('assignee_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <div class="col-md-5">
+                                    <select class="form-control custom-select @error('assignee_id') is-invalid @enderror" name="assignee_id" id="">
+                                        <option value="">Choose</option>
+                                        @foreach($progress->assignee as $assignee)
+                                            <option value="{{$assignee->id}}">{{$assignee->first_name}} {{$assignee->last_name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('assignee_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-group row">
                                 <label for="role" class="col-md-4 col-form-label text-md-right">Comment</label>
-                                <textarea class="col-md-5 form-control" rows="4" cols="50" name="comment"
+                                <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label>
+                                <div class="col-md-5">
+                                    <textarea class="form-control" rows="4" cols="50" name="comment"
                                         style="border: solid 1px #ccc; border-radius: 20px;">{{old('comment')}}</textarea>
+                                </div>
                             </div>
                         </form>
                         <div class="row justify-content-center">

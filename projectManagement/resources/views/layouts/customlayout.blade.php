@@ -134,11 +134,11 @@
                             <div class="col-md-8">
                                 @if (session('alertSuccess'))
                                 <div class="alert alert-success">
-                                    {{ session('alert') }}
+                                    {{ session('alertSuccess') }}
                                 </div>
                                 @elseif (session('alertError'))
                                 <div class="alert alert-danger">
-                                    {{ session('alert') }}
+                                    {{ session('alertError') }}
                                 </div>
                                 @endif
                             </div>

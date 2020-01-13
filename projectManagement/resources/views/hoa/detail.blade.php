@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    @if($detail->type=="edit_user")    
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card py-3 px-4">
@@ -74,27 +75,7 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md text-center">
-            <button type="approve" class="btn btn-success"
-                onclick="event.preventDefault();document.getElementById('user-approve').submit();">Approve</button>
-            <button type="reject" class="btn btn-danger"
-                onclick="event.preventDefault();document.getElementById('user-reject').submit();">Reject</button>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <form id="user-reject" action="/hoa/user/disapprove" method="POST" style="display: none;">
-            @csrf
-            <input type="text" style="display:none" name="type" value="{{$detail->type}}">
-            <input type="text" style="display:none" name="id" value="{{$detail->id}}">
-        </form>
-        <form id="user-approve" action="/hoa/user/approve" method="POST" style="display: none;">
-            @csrf
-            <input type="text" style="display:none" name="type" value="{{$detail->type}}">
-            <input type="text" style="display:none" name="id" value="{{$detail->id}}">
-        </form>
-    </div>
-
+    @else
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card py-3 px-4">
@@ -132,6 +113,26 @@
             </div>
         </div>
     </div>
-
+    @endif
+    <div class="row justify-content-center">
+        <div class="col-md text-center">
+            <button type="approve" class="btn btn-success"
+                onclick="event.preventDefault();document.getElementById('user-approve').submit();">Approve</button>
+            <button type="reject" class="btn btn-danger"
+                onclick="event.preventDefault();document.getElementById('user-reject').submit();">Reject</button>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <form id="user-reject" action="/hoa/user/disapprove" method="POST" style="display: none;">
+            @csrf
+            <input type="text" style="display:none" name="type" value="{{$detail->type}}">
+            <input type="text" style="display:none" name="id" value="{{$detail->id}}">
+        </form>
+        <form id="user-approve" action="/hoa/user/approve" method="POST" style="display: none;">
+            @csrf
+            <input type="text" style="display:none" name="type" value="{{$detail->type}}">
+            <input type="text" style="display:none" name="id" value="{{$detail->id}}">
+        </form>
+    </div>
 </div>
 @endsection

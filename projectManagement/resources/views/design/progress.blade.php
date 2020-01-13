@@ -45,12 +45,14 @@
                         <input type="text"style="display:none" name="project_id" value="{{$progress->proj_id}}">
                         <div class="row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">Media</label>
-                            <input type="file" class="col-md-8 form-control-file @error('file') is-invalid @enderror" id="file" for="file" name="file">
-                            @error('file')
-                                <span class="invalid-feedback col-md-4 col-form-label" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <div class="col-md-8">
+                                <input type="file" class="form-control-file @error('file') is-invalid @enderror" id="file" for="file" name="file">
+                                @error('file')
+                                    <span class="invalid-feedback col-md-8 col-form-label px-0 mx-0" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label for="role" class="col-md-4 col-form-label text-md-right">Comment</label>
