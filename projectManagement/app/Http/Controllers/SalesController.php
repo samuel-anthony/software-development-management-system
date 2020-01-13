@@ -181,13 +181,13 @@ class SalesController extends Controller
         $project = project::whereProjId(request('proj_id'))->first();
         $project->status_id = 2;
         $project->save();
-        return redirect('home')->with('alert','successfull assign new marketing');
+        return redirect('home')->with(['alert'=>'alertSuccess','message'=>'successfully reassign marketing']);
     }
     public function review(){
         $progress = project::whereProjId(request('proj_id'))->first();
         $progress->status_id = 7;
         $progress->save();
-        return redirect('sales/progress/'.request('proj_id'));;
+        return redirect('sales/progress/'.request('proj_id'));
     }
     public function revision(){
         $validator = Validator::make(request()->input(), [
