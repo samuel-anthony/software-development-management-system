@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="container">
-        <h1>Brand Advertising Management System</h1>
+       <img src="https://pngimage.net/wp-content/uploads/2018/06/tribunnews-logo-png-1.png" alt="Logo Tribunnews"> <br><br>
+        <h1>Task Management System</h1>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -11,7 +12,7 @@
                         <form method="POST" action="/customLogin">
                             @csrf
                             <div class="form-group row">
-                                <label for="user_name" class="col-md-4 col-form-label text-md-right isRequired">User Name</label>
+                                <label for="user_name" class="col-md-4 col-form-label text-md-right isRequired">Username</label>
                                 <div class="col-md-6">
                                     <input id="user_name" type="user_name" class="form-control @error('user_name') is-invalid @enderror" name="user_name" value="{{ old('user_name') }}" required autocomplete="user_name" autofocus>
                                     @error('user_name')
