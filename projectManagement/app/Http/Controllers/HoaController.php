@@ -56,7 +56,10 @@ class HoaController extends Controller
         //dd($detail);
         $detail->data = json_decode($detail->data);
         $detail->data->division = division::whereDivId($detail->data->div_id)->first()->div_name;
-        $oldData = User::find($detail->data->id);
+        if($detail->type=="edit_user")
+            $oldData = User::find($detail->data->id);
+        else
+            $oldData = new User;
         $this->getRole();
         return view('hoa.detail',[
             'allMenu'=> $this->allMenu,
@@ -68,10 +71,26 @@ class HoaController extends Controller
         $detail = requestAdmin::find(request('id'));
         $detail->data = json_decode($detail->data);
         if(request('type')=='edit_user'){
-            
+            $user = User::find($detail->data->id);
+            $user->first_name = $detail->data->first_name;
+            $user->last_name = $detail->data->last_name;
+            $user->user_name = $detail->data->user_name;
+            $user->email = $detail->data->email;
+            $user->phone = $detail->data->phone;
+            $user->div_id = $detail->data->div_id;
+            $user->password = $detail->data->password;
+            $user->save();
         }
         else if(request('type')=='add_user'){
-
+            $user = new User;
+            $user->first_name = $detail->data->first_name;
+            $user->last_name = $detail->data->last_name;
+            $user->user_name = $detail->data->user_name;
+            $user->email = $detail->data->email;
+            $user->phone = $detail->data->phone;
+            $user->div_id = $detail->data->div_id;
+            $user->password = $detail->data->password;
+            $user->save();    
         }
         requestAdmin::find(request('id'))->delete();
         return redirect('home')->with('alertSuccess','data successfully approved');
