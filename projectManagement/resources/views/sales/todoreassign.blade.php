@@ -23,24 +23,26 @@
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Requirement</label>
-                        <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label><textarea disabled class="col-md-4 form-control" style="border: solid 1px #ccc; border-radius: 20px;">{{$todo->requirement}}</textarea>
+                        <label style="margin-left: 14px; padding-top: 8px;">:&ensp;&ensp;&ensp;</label><textarea disabled class="col-md-4 form-control" style="border: solid 1px #ccc; border-radius: 20px;">{{$todo->requirement}}</textarea>
                     </div>
                     <form method="POST" action="{{$prefix}}/reassign" id="reassign">
                         @csrf
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">Assignee</label>
-                            <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label>
-                            <select class="col-md-3 form-control custom-select @error('user_id') is-invalid @enderror" name="user_id">
-                                <option value="">Choose</option>
-                                @foreach($marketings as $marketing)
-                                    <option value="{{$marketing->id}}">{{$marketing->first_name}} {{$marketing->last_name}}</option>
-                                @endforeach
-                            </select>
-                            @error('user_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <label style="margin-left: 14px; padding-top: 8px;">:</label>
+                            <div class="col-md-4">
+                                <select class="form-control custom-select @error('user_id') is-invalid @enderror" name="user_id">
+                                    <option value="">Choose</option>
+                                    @foreach($marketings as $marketing)
+                                        <option value="{{$marketing->id}}">{{$marketing->first_name}} {{$marketing->last_name}}</option>
+                                    @endforeach
+                                </select>
+                                @error('user_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                         <input type="text" name="proj_id" value="{{$todo->proj_id}}" style="display:none">
                     </form>
