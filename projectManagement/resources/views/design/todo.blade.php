@@ -35,6 +35,7 @@
                         <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label>
                         <textarea class="col-md-5 form-control" rows="4" cols="50" name="content" disabled style="border: solid 1px #ccc; border-radius: 20px;">{{$todo->content}}</textarea>
                     </div>
+                    @if($todo->status_id != 8)
                     <div class="row justify-content-center">
                         <div class="col-md-6 text-center">
                             <button type="approve" class="btn btn-success" onclick="event.preventDefault();document.getElementById('user-approve').submit();">Approve</button>
@@ -43,6 +44,14 @@
                             <form id="user-reject" action="{{$prefix}}/disapprove" method="POST" style="display: none;">@csrf<input type="text" name="index" value="{{$index}}" style="display:none"><input name="id" value="{{$todo->progresses[$index]->progress_id}}" style="display:none"></form>
                         </div>
                     </div>
+                    @else
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 text-center">
+                            <button type="approve" class="btn btn-success" onclick="event.preventDefault();document.getElementById('revise').submit();">Revise</button>
+                            <form id="revise" action="{{$prefix}}/revise" method="POST" style="display: none;">@csrf<input name="id" value="{{$todo->progresses[0]->progress_id}}" style="display:none"></form>
+                        </div>
+                    </div>
+                    @endif
                     <div class="table-responsive mt-5">
                         <table class="table">
                             <thead class=" text-primary">

@@ -145,4 +145,24 @@ class DesignController extends Controller
         $progress->save();
         return redirect('home');
     }
+
+    
+    public function revise(){
+        $progress = project::whereProjId(request('id'))->first();
+        $progress->status_id = 9;
+        $progress->save();
+        return redirect('design/progress/'.request('id'));
+    }
+    
+    
+    public function download(){
+        $item = project::whereProjId(request('id'))->first(); 
+        $item->media = base64_decode($item->media);
+        return response($item->media)
+                        ->header('Cache-Control', 'no-cache private')
+                        ->header('Content-Description', 'File Transfer')
+                        ->header('Content-Type', $item->media_type)
+                        ->header('Content-Disposition', 'attachment; filename=download.jpg' )
+                        ->header('Content-Transfer-Encoding', 'binary');
+    }
 }

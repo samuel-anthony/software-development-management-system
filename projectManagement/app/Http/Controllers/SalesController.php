@@ -231,4 +231,5 @@ class SalesController extends Controller
                         ->header('Content-Disposition', 'attachment; filename=download.jpg' )
                         ->header('Content-Transfer-Encoding', 'binary');
     }
+    
 }

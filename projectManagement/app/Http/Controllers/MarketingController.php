@@ -74,6 +74,25 @@ class MarketingController extends Controller
         else
             return redirect('home');
     }
+    
+    public function done($param){
+        $this->getRole();
+        $done = project::whereProjId($param)->first();
+        $index = 0;
+        foreach($done->progresses as $progress){
+            if($progress->reporter == $done->progresses[0]->assignee)
+                break;
+            $index++;
+        }
+        if($this->Marketing)
+            return view('marketing.done',[
+                'allMenu'=> $this->allMenu,
+                'prefix'=>$this->prefix,
+                'done'=>$done,
+                'index'=>$index]);
+        else
+            return redirect('home');
+    }
     public function approve(){
         $progress = progress::whereProgressId(request('id'))->first();
         $progress->project->status_id = 3;
@@ -116,5 +135,44 @@ class MarketingController extends Controller
         $progress->save();
 
         return redirect('home');
+    }
+    public function revise(){
+        $progress = project::whereProjId(request('id'))->first();
+        $progress->status_id = 11;
+        $progress->save();
+        return redirect('marketing/progress/'.request('id'));
+    }
+    
+    public function submitRevision(){
+        $validator = Validator::make(request()->input(), [
+            'content'=>'required'
+        ],[
+        ]);
+        if ($validator->fails()) {
+            $validator->validate();
+        }
+        $project = project::whereProjId(request('proj_id'))->first();
+        $project->content = request('content');
+        $project->status_id = 6;
+        $project->save();
+        $progress = new progress;
+        $progress->proj_id = $project->proj_id;
+        $progress->reporter_id = auth()->id();
+        $progress->assignee_id = $project->progresses[0]->reporter_id;
+        $progress->comment = request('comment');
+        $progress->save();
+
+        return redirect('home');
+    }
+    
+    public function download(){
+        $item = project::whereProjId(request('id'))->first(); 
+        $item->media = base64_decode($item->media);
+        return response($item->media)
+                        ->header('Cache-Control', 'no-cache private')
+                        ->header('Content-Description', 'File Transfer')
+                        ->header('Content-Type', $item->media_type)
+                        ->header('Content-Disposition', 'attachment; filename=download.jpg' )
+                        ->header('Content-Transfer-Encoding', 'binary');
     }
 }

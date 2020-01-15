@@ -90,8 +90,11 @@ Route::prefix('marketing')->group(function(){
     Route::get('/progress/{id}','MarketingController@progress');
     Route::get('/done/{id}','MarketingController@done');
     Route::post('/approve','MarketingController@approve');
+    Route::post('/revise','MarketingController@revise');
     Route::post('/disapprove','MarketingController@disapprove');
     Route::post('/submitProgress','MarketingController@submitProgress');
+    Route::post('/submitRevision','MarketingController@submitRevision');
+    Route::post('/download','SalesController@download');
 });
 
 
@@ -101,6 +104,8 @@ Route::prefix('design')->group(function(){
     Route::get('/progress/{id}','DesignController@progress');
     Route::get('/done/{id}','DesignController@done');
     Route::post('/approve','DesignController@approve');
+    Route::post('/revise','DesignController@revise');
     Route::post('/disapprove','DesignController@disapprove');
     Route::post('/submitProgress','DesignController@submitProgress');
+    Route::post('/download','SalesController@download');
 });

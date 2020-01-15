@@ -151,7 +151,22 @@
     </div>
     @else
     <div class="container">
+        
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                @if (session('alertSuccess'))
+                <div class="alert alert-success">
+                    {{ session('alertSuccess') }}
+                </div>
+                @elseif (session('alertError'))
+                <div class="alert alert-danger">
+                    {{ session('alertError') }}
+                </div>
+                @endif
+            </div>
+        </div>
         <div class="text-center">@yield('content')</div>
+        
     </div>
     @endif
     <script src="/assets/js/core/jquery.min.js"></script>

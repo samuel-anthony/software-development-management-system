@@ -19,7 +19,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">E-mail</label>
-                        <label class="col-md-8 col-form-label">: {{$progress->client->cl_name}}</label>
+                        <label class="col-md-8 col-form-label">: {{$progress->client->cl_email}}</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Requirement</label>
@@ -55,6 +55,36 @@
                             <label style="margin-left: 14px; padding-top: 8px;">:</label>
                             <div class="col-md-5">
                                 <textarea class="form-control @error('content') is-invalid @enderror" rows="4" cols="50" name="content" style="border: solid 1px #ccc; border-radius: 20px;"></textarea>  
+                                @error('content')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">Comment</label>
+                            <label style="margin-left: 14px; padding-top: 8px;">:</label>
+                            <div class="col-md-5">
+                                <textarea class="form-control" rows="4" cols="50" name="comment"
+                                    style="border: solid 1px #ccc; border-radius: 20px;"></textarea>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6 text-center">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    @elseif($progress->status_id == 11)
+                    <form method="POST" action="{{$prefix}}/submitRevision">
+                        @csrf
+                        <input name="proj_id" value="{{$progress->proj_id}}" style="display:none">
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">Content</label>
+                            <label style="margin-left: 14px; padding-top: 8px;">:</label>
+                            <div class="col-md-5">
+                                <textarea class="form-control @error('content') is-invalid @enderror" rows="4" cols="50" name="content" style="border: solid 1px #ccc; border-radius: 20px;">{{$progress->content}}</textarea>  
                                 @error('content')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

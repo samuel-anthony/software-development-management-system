@@ -29,6 +29,7 @@
                         <label for="role" class="col-md-4 col-form-label text-md-right">Requirement</label>
                         <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label><textarea disabled class="col-md-4 form-control" style="border: solid 1px #ccc; border-radius: 20px;">{{$todo->requirement}}</textarea>
                     </div>
+                    @if($todo->status_id != 10)
                     <div class="row justify-content-center">
                         <div class="col-md-6 text-center">
                             <button type="approve" class="btn btn-success" onclick="event.preventDefault();document.getElementById('user-approve').submit();">Approve</button>
@@ -37,6 +38,14 @@
                             <form id="user-reject" action="{{$prefix}}/disapprove" method="POST" style="display: none;">@csrf<input name="id" value="{{$todo->progresses[0]->progress_id}}" style="display:none"></form>
                         </div>
                     </div>
+                    @else
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 text-center">
+                            <button type="approve" class="btn btn-success" onclick="event.preventDefault();document.getElementById('revise').submit();">Revise</button>
+                            <form id="revise" action="{{$prefix}}/revise" method="POST" style="display: none;">@csrf<input name="id" value="{{$todo->progresses[0]->progress_id}}" style="display:none"></form>
+                        </div>
+                    </div>
+                    @endif
                     <div class="table-responsive mt-5">
                         <table class="table">
                             <thead class=" text-primary">

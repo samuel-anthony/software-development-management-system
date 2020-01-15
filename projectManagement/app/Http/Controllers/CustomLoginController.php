@@ -10,6 +10,9 @@ class CustomLoginController extends Controller
     {
         //$this->middleware('auth');
     }
+    public function loginview(){
+        return view('auth.login');
+    }
     public function login(){
         if(Auth::attempt([
             'user_name'=>request('user_name'),
@@ -18,7 +21,7 @@ class CustomLoginController extends Controller
             return redirect('home');
         }
         else{
-            return redirect('login')->with('alertError','wrong credential please try again');
+            return redirect('login')->with(['alert'=>'alertError','message'=>'wrong credential please try again']);
         } 
     }
 }
