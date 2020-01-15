@@ -32,7 +32,7 @@ class UserController extends Controller
     public function index(){
         $this->getRole();
         if($this->isAdmin){
-            $users = User::paginate(1);
+            $users = User::paginate(10);
             return view('/user/index',[
                 'users'=>$users,
                 'allMenu'=> $this->allMenu,
@@ -142,7 +142,7 @@ class UserController extends Controller
         $user->phone = $request->get('phone');
         $user->email = $request->get('email');
         $user->div_id = $request->get('role');
-        $user->password = bcrypt($request->get('role'));
+        $user->password = bcrypt($request->get('password'));
         $requestAdmin = new requestAdmin;
         $requestAdmin->data = json_encode($user->getAttributes());
         $requestAdmin->type = 'add_user';

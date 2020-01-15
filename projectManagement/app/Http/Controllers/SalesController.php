@@ -165,7 +165,7 @@ class SalesController extends Controller
         $progress->comment = request('comment');
         $progress->save();
 
-        return redirect('sales')->with('alert','successfully add new project');
+        return redirect('sales')->with('alertSuccess','successfully add new project');
     }
     public function reassign(){
         $validator = Validator::make(request()->input(), [
@@ -219,7 +219,7 @@ class SalesController extends Controller
         $progress = project::whereProjId(request('proj_id'))->first();
         $progress->status_id = 12;
         $progress->save();
-        return redirect('home');    
+        return redirect('home')->with(['alert'=>'alertSuccess','message'=>'successfully finish the project']);    
     }
     public function download(){
         $item = project::whereProjId(request('id'))->first(); 

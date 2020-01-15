@@ -78,7 +78,6 @@ class HoaController extends Controller
             $user->email = $detail->data->email;
             $user->phone = $detail->data->phone;
             $user->div_id = $detail->data->div_id;
-            $user->password = $detail->data->password;
             $user->save();
         }
         else if(request('type')=='add_user'){
