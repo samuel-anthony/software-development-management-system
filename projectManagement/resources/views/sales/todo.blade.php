@@ -27,8 +27,8 @@
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Media</label>
-                        <div class="col-md-8">: <a href=""onclick="event.preventDefault();document.getElementById('download').submit();">attachment</a></div>
-                        <form id="download" action="{{$prefix}}/download" method="POST" style="display: none;">@csrf<input type="text" name="id" value="{{$todo->proj_id}}" style="display:none"></form>
+                        <label class="col-form-label" style="margin-left: 15px;">:&nbsp;</label>
+                        <img src="https://yt3.ggpht.com/a/AGF-l78F-aj-xBbqKTkXIujt_cBy5YMc3BnhYIn46w=s900-c-k-c0xffffffff-no-rj-mo" data-toggle="modal" data-target="#previewMedia" width="200px" height="100px">
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Assignee</label>
@@ -81,4 +81,24 @@
             </div>
         </div>
     </div>
-    @endsection
+
+<div class="modal fade" id="previewMedia" tabindex="-1" role="dialog" aria-labelledby="previewMedia" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="previewMedia">Preview</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="https://yt3.ggpht.com/a/AGF-l78F-aj-xBbqKTkXIujt_cBy5YMc3BnhYIn46w=s900-c-k-c0xffffffff-no-rj-mo" data-toggle="modal" data-target="#previewMedia">
+        <div class="text-center">
+            <a href="" class="btn btn-primary" onclick="event.preventDefault();document.getElementById('download').submit();">DOWNLOAD</a>
+            <form id="download" action="{{$prefix}}/download" method="POST" style="display: none;">@csrf<input type="text" name="id" value="{{$todo->proj_id}}" style="display:none"></form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
