@@ -1,6 +1,7 @@
 @extends('layouts.customlayout')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -81,26 +82,21 @@
                         <table class="table">
                             <thead class=" text-primary">
                                 <th>No.</th>
-                                <th>Clien</th>
+                                <th>Client</th>
                                 <th>Start</th>
                                 <th>End</th>
-                                <th>Assignee</th>
-                                <th>Division</th>
                                 <th>Status</th>
                             </thead>
                             <tbody>
-                                @if(count($requestAdmins)>0)
+                                @if(count($projects)>0)
                                 @php($num = 1)
-                                @foreach ($requestAdmins as $requestAdmin)
+                                @foreach ($projects as $project)
                                 <tr>
                                     <td>{{$num}}</td>
-                                    <td>{{$requestAdmin->type}}</td>
-                                    <td>Username : {{$requestAdmin->data->user_name}}, email :
-                                        {{$requestAdmin->data->email}}</td>
-                                    <td class="text-center">
-                                        <a href='{{$prefix}}/detail/{{$requestAdmin->id}}'><button type="submit"
-                                                class="btn btn-primary">View</button></a>
-                                    </td>
+                                    <td>{{$project->client->cl_name}}</td>
+                                    <td>{{$project->start_date}}</td>
+                                    <td>{{$project->due_date}}</td>
+                                    <td>{{$project->status->status_name}}</td>
                                     @php($num++)
                                 </tr>
                                 @endforeach
@@ -118,4 +114,39 @@
         </div>
     </div>
 </div>
+@php($labelClient = [])
+@php($clientProject = [])
+@foreach($clients as $client)
+    @php(array_push($labelClient,$client->cl_name))
+    @php(array_push($clientProject,count($client->projects)))
+@endforeach
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var clr = ['rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)']
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @json($labelClient),
+                datasets: [{
+                    label: '# of Votes',
+                    data: @json($clientProject),
+                    backgroundColor: clr
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
 @endsection

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\division;
 use App\requestAdmin;
+use App\client;
+use App\project;
 use Illuminate\Support\Facades\DB;
 class HoaController extends Controller
 {
@@ -43,11 +45,15 @@ class HoaController extends Controller
         for($c = 0; $c < count($requestAdmins); $c++){
             $requestAdmins[$c]->data = json_decode($requestAdmins[$c]->data);
         }
+        $clients = client::all();
+        $projects = project::all();
         if($this->Hoa)
             return view('hoa.report',[
                 'allMenu'=> $this->allMenu,
                 'requestAdmins'=>$requestAdmins,
-                'prefix'=>$this->prefix]);
+                'prefix'=>$this->prefix,
+                'clients'=>$clients,
+                'projects'=>$projects]);
         else
             return redirect('home');
     }
