@@ -116,7 +116,7 @@ class DesignController extends Controller
         $newProgress->comment = 'sorry i reject';
         $newProgress->save();
         
-        return redirect('home');
+        return redirect('sendReject/'.$progress->reporter_id);
     }
 
     public function submitProgress(){
@@ -143,7 +143,7 @@ class DesignController extends Controller
         $progress->assignee_id = $project->progresses[0]->reporter_id;
         $progress->comment = request('comment');
         $progress->save();
-        return redirect('home');
+        return redirect('sendMessage/'.$project->progresses[0]->reporter_id."/5");
     }
 
     

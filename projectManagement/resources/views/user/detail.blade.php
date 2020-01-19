@@ -7,7 +7,7 @@
             <div class="card py-3 px-4">
                 <div class="card-header text-center"><h3 class="font-weight-bold">Detail Profile</h3></div>
                 <div class="card-body">
-                    <form method="GET" action="/user/edit user/{{$user->id}}">
+                    <form method="GET" action="/user/edit user/{{$user->id}}" id="edit-user">
                         <div class="row">
                             <div class="col-md-3 pr-1">
                                 <div class="form-group">
@@ -20,6 +20,12 @@
                                     <label>Username</label>
                                     <input type="text" class="form-control" disabled="" placeholder="Username" value="{{$user->user_name}}">
                                 </div>
+                            </div>
+                            <div class="col-md-3 pr-1">
+                                    <div class="form-group">
+                                        <label>Telegram ID</label>
+                                        <input class="form-control  @error('telegram_id') is-invalid @enderror" value="{{$user->telegram_id ?? 'Not Set'}}" disabled>
+                                    </div>
                             </div>
                         </div>
                         <div class="row">
@@ -58,12 +64,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row justify-content-center">
-                            <div class="col-md-6 text-center">
-                              <button type="submit" class="btn btn-primary align-item-center">Edit</button>
-                            </div>
-                        </div>
                     </form>
+
+                            
+                    <div class="row justify-content-center">
+                        <div class="col-md-6 text-center">
+                            <button type="submit" class="btn btn-primary align-item-center" onclick="event.preventDefault();document.getElementById('edit-user').submit();">Edit</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -112,7 +112,7 @@ class MarketingController extends Controller
         $newProgress->comment = 'sorry i reject';
         $newProgress->save();
         
-        return redirect('home');
+        return redirect('sendReject/'.$progress->reporter_id);
     }
     public function submitProgress(){
         $validator = Validator::make(request()->input(), [
@@ -134,7 +134,8 @@ class MarketingController extends Controller
         $progress->comment = request('comment');
         $progress->save();
 
-        return redirect('home');
+        
+        return redirect('sendMessage/'.request('assignee_id')."/4");
     }
     public function revise(){
         $progress = project::whereProjId(request('id'))->first();
@@ -162,7 +163,8 @@ class MarketingController extends Controller
         $progress->comment = request('comment');
         $progress->save();
 
-        return redirect('home');
+    
+        return redirect('sendMessage/'.$project->progresses[0]->reporter_id."/4");
     }
     
     public function download(){

@@ -20,6 +20,8 @@ Route::get('/createUser','Auth\RegisterController@registerNew');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/sendMessage/{id}/{senderDivision}', 'UserController@sendTelegramMessage');
+Route::get('/sendReject/{id}', 'UserController@sendTelegramMessageReject');
 Route::post('/customLogin', 'CustomLoginController@login');
 Route::get('/tes/{menu}', 'test@getMenu');
 Route::get('/tes aja',function () {
@@ -44,7 +46,9 @@ Route::prefix('user')->group(function (){
     Route::get('/detail user/{id}','UserController@detail');
     Route::get('/edit user/{id}','UserController@viewEdit');
     Route::post('/edit user','UserController@editUser');
+    Route::post('/edit own','UserController@editOwn');
     Route::post('/add user','UserController@addUser');
+    Route::post('/delete','UserController@delete');
 });
 
 Route::prefix('division')->group(function(){
