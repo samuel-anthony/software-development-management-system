@@ -199,6 +199,34 @@
             $("#clientEmail").val(selectedEmail);
         });
     </script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var clr = ['rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)']
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Client 1', 'Client 2', 'Client 3', 'Client 4', 'Client 5'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: clr
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
