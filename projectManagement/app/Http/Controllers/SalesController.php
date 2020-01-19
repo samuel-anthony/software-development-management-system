@@ -213,7 +213,7 @@ class SalesController extends Controller
         $progress->assignee_id = request('assignee_id');
         $progress->comment = request('comment');
         $progress->save();
-        return redirect('sendMessage/'.request('user_id')."/3");
+        return redirect('sendMessage/'.request('assignee_id')."/3");
     }
     public function finishProject(){
         $progress = project::whereProjId(request('proj_id'))->first();
