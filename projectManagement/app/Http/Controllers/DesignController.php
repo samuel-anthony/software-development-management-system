@@ -121,7 +121,7 @@ class DesignController extends Controller
 
     public function submitProgress(){
         $validator = Validator::make(request()->file(), [
-			'file' => 'required|file|mimes:jpg,jpeg,png|max:1024'
+			'file' => 'required|file|mimes:jpg,jpeg,png|max:10240'//10mb
         ],[
             'file.mimes' => 'the upload must be in format of jpg, jpeg, png'
         ]);
