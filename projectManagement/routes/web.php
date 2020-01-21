@@ -70,6 +70,7 @@ Route::prefix('hoa')->group(function(){
     Route::get('/detail/{id}','HoaController@detail');
     Route::post('/user/approve','HoaController@userApprove');
     Route::post('/user/disapprove','HoaController@userDisapprove');
+    Route::post('/report','HoaController@reportsearch');
 });
 
 

@@ -181,7 +181,7 @@ class SalesController extends Controller
         $project = project::whereProjId(request('proj_id'))->first();
         $project->status_id = 2;
         $project->save();
-        return redirect('home')->with(['alert'=>'alertSuccess','message'=>'successfully reassign marketing']);
+        return redirect('sendMessage/'.request('user_id')."/3");
     }
     public function review(){
         $progress = project::whereProjId(request('proj_id'))->first();

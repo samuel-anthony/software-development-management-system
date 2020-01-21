@@ -8,7 +8,10 @@ use App\division;
 use App\requestAdmin;
 use App\client;
 use App\project;
+use App\status;
 use Illuminate\Support\Facades\DB;
+use Validator;
+use DateTime;
 class HoaController extends Controller
 {
     //
@@ -47,13 +50,15 @@ class HoaController extends Controller
         }
         $clients = client::all();
         $projects = project::all();
+        $status = status::all();
         if($this->Hoa)
             return view('hoa.report',[
                 'allMenu'=> $this->allMenu,
                 'requestAdmins'=>$requestAdmins,
                 'prefix'=>$this->prefix,
                 'clients'=>$clients,
-                'projects'=>$projects]);
+                'projects'=>$projects,
+                'statuses'=>$status]);
         else
             return redirect('home');
     }
@@ -104,4 +109,50 @@ class HoaController extends Controller
         requestAdmin::find(request('id'))->delete();
         return redirect('home');
     }
+    public function reportsearch(){
+        $validator = Validator::make(request()->input(), [
+            'due_date'=> !is_null(request('start_date')) &&  !is_null(request('due_date'))? 'date|after:start_date' : ''
+        ],[
+        ]);
+        if ($validator->fails()) {
+            $validator->validate();
+        }
+        if(!is_null(request('start_date'))){
+            $date = explode('/',request('start_date'));
+            $start_date = DateTime::createFromFormat('Y-m-d', $date[2].'-'.$date[0].'-'.$date[1]);
+        }
+        else{
+            $start_date = '1900-01-01';
+        }
+        if(!is_null(request('due_date'))){
+            $date = explode('/',request('due_date'));
+            $due_date = DateTime::createFromFormat('Y-m-d', $date[2].'-'.$date[0].'-'.$date[1]);
+        }
+        else{
+            $due_date = '3000-12-31';
+        }
+        if(is_null(request('status'))){
+            $report = project::where('start_date','>=',$start_date)->where('due_date','<=',$due_date)->get();
+        }
+        else{
+            $report = project::where('start_date','>=',$start_date)->where('due_date','<=',$due_date)->whereStatusId(request('status'))->get();
+        }
+        $this->getRole();
+        $listClient = [];
+        foreach($report as $project){
+            array_push($listClient,$project->cl_id);
+        }
+        $clients = client::whereIn('cl_id',$listClient)->get();
+        $status = status::all();
+        return view('hoa.report',[
+                'allMenu'=> $this->allMenu,
+                'prefix'=>$this->prefix,
+                'clients'=>$clients,
+                'projects'=>$report,
+                'statuses'=>$status,
+                'strt_dt'=>request('start_date'),
+                'due_dt'=>request('due_date'),
+                'status_old'=>request('status')]);
+    }
+
 }

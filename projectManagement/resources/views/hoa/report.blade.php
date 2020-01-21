@@ -10,13 +10,14 @@
                     <h3 class="font-weight-bold">Report</h3>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="">
+                    <form method="POST" action="/hoa/report">
+                        @csrf
                         <div class="row form-group">
                             <div class="col-md-2">
                                 <label>Start Date</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" id="datepicker1" class="form-control" name="" value="">
+                                <input type="text" id="datepicker1" class="form-control" name="start_date" value="{{$strt_dt ?? old('start_date')}}">
                             </div>
                         </div>
                         <div class="row form-group">
@@ -24,31 +25,12 @@
                                 <label>End Date</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" id="datepicker2" class="form-control" name="" value="">
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-md-2">
-                                <label>Client</label>
-                            </div>
-                            <div class="col-md-3">
-                                <select class="form-control custom-select" for="" name="">
-                                    <option value="1">Satu</option>
-                                    <option value="2">Dua</option>
-                                    <option value="3">Tiga</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-md-2">
-                                <label>Division</label>
-                            </div>
-                            <div class="col-md-3">
-                                <select class="form-control custom-select" for="" name="">
-                                    <option value="1">Satu</option>
-                                    <option value="2">Dua</option>
-                                    <option value="3">Tiga</option>
-                                </select>
+                                <input type="text" id="datepicker2" class="form-control @error('due_date') is-invalid @enderror" name="due_date" value="{{$due_dt??old('due_date')}}">
+                                @error('due_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row form-group">
@@ -56,20 +38,22 @@
                                 <label>Status</label>
                             </div>
                             <div class="col-md-3">
-                                <select class="form-control custom-select" for="" name="">
-                                    <option value="1">Satu</option>
-                                    <option value="2">Dua</option>
-                                    <option value="3">Tiga</option>
+                                <select class="form-control custom-select" for="" name="status">
+                                    <option value="">No filter</option>
+                                    @if(!is_null($status_old))
+                                    @foreach($statuses as $status)
+                                        <option value="{{$status->status_id}}">{{$status->status_name}}</option>
+                                    @endforeach
+                                    @else
+                                    @foreach($statuses as $status)
+                                        @if($status == $status_old)
+                                        <option value="{{$status->status_id}}" selected>{{$status->status_name}}</option>
+                                        @else
+                                        <option value="{{$status->status_id}}">{{$status->status_name}}</option>
+                                        @endif
+                                    @endforeach
+                                    @endif
                                 </select>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-md-2">
-                                <label>Assigne</label>
-                            </div>
-                            <div class="col-md-7">
-                                <input name="" type="text" class="form-control @error('') is-invalid @enderror" name=""
-                                    required autocomplete="" autofocus value="">
                             </div>
                         </div>
                         <div class="row justify-content-center">

@@ -21,7 +21,7 @@ class CustomLoginController extends Controller
             return redirect('home');
         }
         else{
-            //return redirect('login')->with(['alert'=>'alertError','message'=>'wrong credential please try again']);
+            return redirect('login')->with(['alert'=>'alertError','message'=>'wrong credential please try again']);
         } 
     }
 }
