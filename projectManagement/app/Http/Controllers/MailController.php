@@ -19,6 +19,6 @@ class MailController extends Controller
         ];
 
         \Mail::to($project->client->cl_email)->send(new SendMail($details));
-        return view('home');
+        return redirect('home')->with(['alert'=>'alertSuccess','message'=>'successfully finish the project']);
     }
 }
