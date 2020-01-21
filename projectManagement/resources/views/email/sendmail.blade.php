@@ -4,8 +4,10 @@
     <title>Real Programmer</title>
 </head>
 <body>
-    <h1>{{ $details['title'] }}</h1>
-    <p>{{ $details['body'] }}</p>
+    <p>{{ $details['dear'] }}</p>
+    <p>{{ $details['row1'] }}</p>
+    <p>{{ $details['row2'] }}</p>
+    <p>{{ $details['row3'] }}</p>
     <p>Thank you</p>
 </body>
 </html>

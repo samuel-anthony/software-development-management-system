@@ -219,8 +219,8 @@ class SalesController extends Controller
         $progress = project::whereProjId(request('proj_id'))->first();
         $progress->status_id = 12;
         $progress->save();
-        return redirect('home')->with(['alert'=>'alertSuccess','message'=>'successfully finish the project']);    
-    }
+		return redirect('sendEmail/'.$progress->proj_id);
+	}
     public function download(){
         $item = project::whereProjId(request('id'))->first(); 
         $item->media = base64_decode($item->media);

@@ -7,15 +7,18 @@ use Illuminate\Http\Request;
 use App\project;
 class MailController extends Controller
 {
-    public function mailsend(){
-        $project = project::first();
+    public function mailsend($param){
+        $project = project::whereProjId($param)->first();
         $details = [
-            'title' => $project->client->cl_name,
-            'body' => 'Body: This is for testing email using smtp',
+            'dear'=>'Dear, '.$project->client->cl_name,
+            'row1' => 'Here is your advertising report with following components : ',
+			'row2' => 'Requirement : '.$project->requirement,
+			'row3' => 'Content : '.$project->content,
+			'row4' => 'Thank you',
             'image' => $project->media
         ];
 
-        \Mail::to('samuelanthony1696@gmail.com')->send(new SendMail($details));
+        \Mail::to($project->client->cl_email)->send(new SendMail($details));
         return view('home');
     }
 }

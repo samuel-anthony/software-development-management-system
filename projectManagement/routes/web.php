@@ -14,7 +14,6 @@
 Route::get('/', function () {
     return redirect('login');
 });
-
 Route::get('/createUser','Auth\RegisterController@registerNew');
 
 Auth::routes();
@@ -22,7 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/sendMessage/{id}/{senderDivision}', 'UserController@sendTelegramMessage');
 Route::get('/sendReject/{id}', 'UserController@sendTelegramMessageReject');
-Route::get('/sendEmail', 'mailController@mailsend');
+Route::get('/sendEmail/{id}', 'mailController@mailsend');
 Route::post('/customLogin', 'CustomLoginController@login');
 Route::get('/tes/{menu}', 'test@getMenu');
 Route::get('/tes aja',function () {

@@ -29,7 +29,7 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Mail from Real Programmer')->attachData(base64_decode($this->details['image']),'gambar.png',[])
+        return $this->subject('Advertising Report')->attachData(base64_decode($this->details['image']),'gambar.jpeg',[])
                     ->view('email.sendmail');
     }
 }
