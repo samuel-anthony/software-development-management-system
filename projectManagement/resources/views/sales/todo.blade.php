@@ -32,7 +32,7 @@
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Media</label>
                         <label class="col-form-label" style="margin-left: 15px;">:&nbsp;</label>
-                        <img src="data:image/png;base64,{{$todo->media}}" data-toggle="modal" data-target="#previewMedia" width="200px" height="100px">
+                        <img src="data:image/png;base64,{{$todo->media}}" data-toggle="modal" data-target="#previewMedia" width="200px" height="100px" alt="">
                     </div>
                     <div class="form-group row">
                         <label class="col-md-4 col-form-label text-md-right">Assignee</label>
@@ -96,7 +96,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <img src="data:image/png;base64,{{$todo->media}}" data-toggle="modal" data-target="#previewMedia">
+        <img src="data:image/png;base64,{{$todo->media}}" data-toggle="modal" data-target="#previewMedia" alt="">
         <div class="text-center">
             <a href="" class="btn btn-primary" onclick="event.preventDefault();document.getElementById('download').submit();">DOWNLOAD</a>
             <form id="download" action="{{$prefix}}/download" method="POST" style="display: none;">@csrf<input type="text" name="id" value="{{$todo->proj_id}}" style="display:none"></form>

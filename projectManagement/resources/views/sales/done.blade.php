@@ -47,8 +47,8 @@
                     @if(!is_null($done->media))
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Media</label>
-                        <div class="col-md-8">: <a href=""onclick="event.preventDefault();document.getElementById('download').submit();">attachment</a></div>
-                        <form id="download" action="{{$prefix}}/download" method="POST" style="display: none;">@csrf<input type="text" name="id" value="{{$done->proj_id}}" style="display:none"></form>
+                        <label class="col-form-label" style="margin-left: 15px;">:&nbsp;</label>
+                        <img src="data:image/png;base64,{{$done->media}}" data-toggle="modal" data-target="#previewMedia" width="200px" height="100px" alt="">
                     </div>
                     @endif
                     <div class="table-responsive mt-5">
@@ -81,4 +81,24 @@
             </div>
         </div>
     </div>
-    @endsection
+
+    <div class="modal fade" id="previewMedia" tabindex="-1" role="dialog" aria-labelledby="previewMedia" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="previewMedia">Preview</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="data:image/png;base64,{{$done->media}}" data-toggle="modal" data-target="#previewMedia">
+                    <div class="text-center">
+                        <a href="" class="btn btn-primary" onclick="event.preventDefault();document.getElementById('download').submit();">DOWNLOAD</a>
+                        <form id="download" action="{{$prefix}}/download" method="POST" style="display: none;">@csrf<input type="text" name="id" value="{{$done->proj_id}}" style="display:none"></form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
