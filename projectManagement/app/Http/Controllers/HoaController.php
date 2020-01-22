@@ -37,7 +37,8 @@ class HoaController extends Controller
             return view('hoa.index',[
                 'allMenu'=> $this->allMenu,
                 'requestAdmins'=>$requestAdmins,
-                'prefix'=>$this->prefix]);
+                'prefix'=>$this->prefix,
+                ]);
         else
             return redirect('home');
         
@@ -58,7 +59,8 @@ class HoaController extends Controller
                 'prefix'=>$this->prefix,
                 'clients'=>$clients,
                 'projects'=>$projects,
-                'statuses'=>$status]);
+                'statuses'=>$status,
+                'status_old'=>null]);
         else
             return redirect('home');
     }
