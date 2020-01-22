@@ -34,9 +34,9 @@ class UserController extends Controller
         if(!is_null($user->telegram_id)){
             $token = "934290314:AAEzTr2xI7hIsYiw62gLjpY1rYaOtTniLGQ";
             if($user->div_id != 3)
-                $message = "You have a new task, please check your Task Management to do it.";
+                $message = "Hello, ".$user->first_name." ".$user->last_name." have a new task, please check your Task Management to do it.";
             else
-                $message = "Your project already done by the assignee, kindly please check your Task Management to review.";
+                $message = "Hello, ".$user->first_name." ".$user->last_name." project already done by the assignee, kindly please check your Task Management to review.";
             $requestParam = [
                 'chat_id' => $user->telegram_id,
                 'text' => $message
@@ -58,7 +58,7 @@ class UserController extends Controller
         $user = User::find($userID);
         if(!is_null($user->telegram_id)){
             $token = "934290314:AAEzTr2xI7hIsYiw62gLjpY1rYaOtTniLGQ";
-            $message = 'Your task is being rejected. Please check your "To Do" to assign new user';
+            $message = 'Dear, '.$user->first_name.' '.$user->last_name.' task is being rejected. Please check your "To Do" to assign new user';
             $requestParam = [
                 'chat_id' => $user->telegram_id,
                 'text' => $message
