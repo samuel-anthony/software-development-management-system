@@ -5,9 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card py-3 px-4">
-                <div class="card-header text-center">
-                    <h3 class="font-weight-bold">Your Target This Month is: 45</h3>
-                </div>
                 <div class="card-body">
                     <h4 class="text-center">To Do</h4>
                     <div class="table-responsive">
