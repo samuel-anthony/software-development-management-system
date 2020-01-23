@@ -217,8 +217,15 @@ class SalesController extends Controller
     }
     public function finishProject(){
         $progress = project::whereProjId(request('proj_id'))->first();
+        $today = date('Y-m-d');
+        if($progress->due_date < $today)//late
+        $progress->status_id = 13;
+        else
         $progress->status_id = 12;
+        $progress->finished_date = $today;
         $progress->save();
+
+
 		return redirect('sendEmail/'.$progress->proj_id);
 	}
     public function download(){

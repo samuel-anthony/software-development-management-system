@@ -18,6 +18,7 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('cl_id');
             $table->date('start_date');
             $table->date('due_date');
+            $table->date('finished_date')->nullable();
             $table->string('requirement')->nullable();
             $table->string('content')->nullable();
             $table->string('media_type')->nullable();
