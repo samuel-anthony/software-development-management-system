@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header"><i class="now-ui-icons users_single-02"></i>&nbsp;&nbsp;{{ __('Login') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="/customLogin">
+                        <form method="POST" action="/login">
                             @csrf
                             <div class="form-group row">
                                 <label for="user_name" class="col-md-4 col-form-label text-md-right isRequired">Username</label>

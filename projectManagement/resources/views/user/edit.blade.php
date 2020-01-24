@@ -32,6 +32,18 @@
                                         @enderror
                                     </div>
                                 </div>
+                                
+                                <div class="col-md-3 pr-1">
+                                    <div class="form-group">
+                                        <label>Telegram ID</label>
+                                        <input class="form-control  @error('telegram_id') is-invalid @enderror" value="{{$user->telegram_id}}" placeholder="ex:12345678" name="telegram_id">
+                                        @error('telegram_id')
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                          </span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 pr-1">
@@ -74,6 +86,18 @@
                                               @endif
                                             @endfor
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Inactive User</label>
+                                        @if($user->isInactive == 0)
+                                        <input type="checkbox" name="isInactive">
+                                        @else
+                                        <input type="checkbox" name="isInactive" checked>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

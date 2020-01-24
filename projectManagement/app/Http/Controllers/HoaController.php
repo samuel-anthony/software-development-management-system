@@ -91,6 +91,8 @@ class HoaController extends Controller
             $user->email = $detail->data->email;
             $user->phone = $detail->data->phone;
             $user->div_id = $detail->data->div_id;
+            $user->telegram_id = $detail->data->telegram_id;
+            $user->isInactive = $detail->data->isInactive;
             $user->save();
         }
         else if(request('type')=='add_user'){

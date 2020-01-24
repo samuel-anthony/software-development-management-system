@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('telegram_id')->nullable();
             $table->unsignedBigInteger('div_id');
+            $table->boolean('isInactive')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

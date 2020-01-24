@@ -9,12 +9,12 @@
                 <div class="card">
                     <div class="card-header"><i class="now-ui-icons users_single-02"></i>&nbsp;&nbsp;{{ __('Login') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="/customLogin">
+                        <form method="POST" action="/login">
                             @csrf
                             <div class="form-group row">
                                 <label for="user_name" class="col-md-4 col-form-label text-md-right isRequired">Username</label>
                                 <div class="col-md-6">
-                                    <input id="user_name" type="user_name" class="form-control @error('user_name') is-invalid @enderror" name="user_name" value="{{ old('user_name') }}" required autocomplete="user_name" autofocus>
+                                    <input id="user_name" type="user_name" class="form-control is-invalid" name="user_name" value="{{ $user_name }}" required autocomplete="user_name" autofocus>
                                     @error('user_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -27,7 +27,7 @@
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control is-invalid" name="password" required autocomplete="current-password">
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>The Credential Doesn't Match</strong>
+                                            <strong>{{$error_message}}</strong>
                                         </span>
                                 </div>
                             </div>

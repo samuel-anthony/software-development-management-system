@@ -150,7 +150,6 @@ class UserController extends Controller
         if ($validator->fails()) {
             $validator->validate();
         }
-
         $user = User::find($request->get('user_id'));
         $user->user_name = $request->get('user_name');
         $user->first_name = $request->get('first_name');
@@ -158,7 +157,11 @@ class UserController extends Controller
         $user->phone = $request->get('phone');
         $user->email = $request->get('email');
         $user->div_id = $request->get('role');
-        
+        $user->telegram_id = request('telegram_id');
+        if(is_null($request->input('isInactive')))
+            $user->isInactive = 0;
+        else
+            $user->isInactive = 1;
         $requestAdmin = new requestAdmin;
         $requestAdmin->data = json_encode($user->getAttributes());
         $requestAdmin->type = 'edit_user';

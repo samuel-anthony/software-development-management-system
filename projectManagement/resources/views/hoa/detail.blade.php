@@ -36,6 +36,14 @@
                         <label for="phone" class="col-md-4 col-form-label text-md-right">Phone No</label>
                         <label class="col-md-8 col-form-label">: {{$oldData->phone}}</label>
                     </div>
+                    <div class="form-group row">
+                        <label for="phone" class="col-md-4 col-form-label text-md-right">Telegram ID</label>
+                        <label class="col-md-4 col-form-label">: {{$oldData->telegram_id}}</label>
+                    </div>
+                    <div class="form-group row">
+                        <label for="phone" class="col-md-4 col-form-label text-md-right">Inactive User</label>
+                        <label class="col-md-4 col-form-label">: {{$oldData->isInactive == 0 ? 'false' : 'true'}}</label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,6 +78,14 @@
                     <div class="form-group row">
                         <label for="phone" class="col-md-4 col-form-label text-md-right">Phone No</label>
                         <label class="col-md-4 col-form-label">: {{$detail->data->phone}}</label>
+                    </div>
+                    <div class="form-group row">
+                        <label for="phone" class="col-md-4 col-form-label text-md-right">Telegram ID</label>
+                        <label class="col-md-4 col-form-label">: {{$detail->data->telegram_id}}</label>
+                    </div>
+                    <div class="form-group row">
+                        <label for="phone" class="col-md-4 col-form-label text-md-right">Inactive User</label>
+                        <label class="col-md-4 col-form-label">: {{$detail->data->isInactive == 0 ? 'false' : 'true'}}</label>
                     </div>
                 </div>
             </div>
