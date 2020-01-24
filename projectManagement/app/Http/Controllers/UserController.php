@@ -120,7 +120,10 @@ class UserController extends Controller
         $this->getRole();
         if($this->isAdmin || $param1 == auth()->id()){
             $allRole = division::all();
+            if(!$this->isAdmin)
             $ownProfile = $param1 == auth()->id();
+            else
+            $ownProfile = false;
             if($param1 != auth()->id() && !$this->isAdmin)
                 return redirect()->action('HomeController@index');
             else
