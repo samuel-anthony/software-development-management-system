@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="col-md-4 px-1">
                                     <div class="form-group">
-                                        <label>Role</label>
+                                        <label>Division</label>
                                         <select class="form-control custom-select" id="role" name="role">
                                             @for($counter = 0;$counter < count($allRole); $counter++)
                                               @if($user->div_id == $counter+1)
@@ -175,7 +175,7 @@
                                 </div>
                                 <div class="col-md-4 px-1">
                                     <div class="form-group">
-                                        <label>Role</label>
+                                        <label>Division</label>
                                         <select class="form-control custom-select" id="role" name="role" disabled>
                                             @for($counter = 0;$counter < count($allRole); $counter++)
                                               @if($user->div_id == $counter+1)

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Brand Advertising Management System</title>
+    <title>Task Management System</title>
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/jquery-ui.css">
     <link href="/assets/css/now-ui-dashboard.css?v=1.3.0" rel="stylesheet" />
