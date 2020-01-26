@@ -59,7 +59,7 @@
                             </div>
                             <div class="col-md-4 px-1">
                                 <div class="form-group">
-                                    <label>Role</label>
+                                    <label>Division</label>
                                     <input type="text" class="form-control" disabled="" placeholder="Role" value="{{$user->division['div_name']}}">
                                 </div>
                             </div>
