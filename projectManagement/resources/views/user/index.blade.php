@@ -18,7 +18,7 @@
                               <tbody>
                                   @foreach ($users as $user)
                                     <tr>
-                                        <td>{{$user->user_name}}</td>
+                                        <td>{{$user->user_name}} @if($user->isInactive) (Inactive) @endif</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->division['div_name']}}</td>
                                         <td class="text-center">

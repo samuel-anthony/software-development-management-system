@@ -198,7 +198,7 @@
                         @php($done = 0)
                         @php($doneLate = 0)
                         @foreach($client->projects as $project)
-                            @if($project->status_id == 1)
+                            @if($project->status_id == 1 || $project->status_id == 2)
                                 @php($todo++)
                             @elseif($project->status_id == 12)
                                 @php($done++)

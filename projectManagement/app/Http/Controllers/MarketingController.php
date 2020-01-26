@@ -47,7 +47,7 @@ class MarketingController extends Controller
         $designers = User::whereDivId(5)->whereNotIn('id',$rejector)->get();
         if($this->Marketing)
             if($todo->status_id==1)
-                return view('sales.todoreassign',[
+                return view('marketing.todoreassign',[
                     'allMenu'=> $this->allMenu,
                     'prefix'=>$this->prefix,
                     'designers'=>$designers,
@@ -74,7 +74,6 @@ class MarketingController extends Controller
         else
             return redirect('home');
     }
-    
     public function done($param){
         $this->getRole();
         $done = project::whereProjId($param)->first();
@@ -136,6 +135,23 @@ class MarketingController extends Controller
 
         
         return redirect('sendMessage/'.request('assignee_id')."/4");
+    }
+    
+    public function reassign(){
+        $validator = Validator::make(request()->input(), [
+            'user_id'=>'required',
+        ],[
+        ]);
+        if ($validator->fails()) {
+            $validator->validate();
+        }
+        $progress = progress::whereReporterId(auth()->id())->whereProjId(request('proj_id'))->first();
+        $progress->assignee_id = request('user_id');
+        $progress->save();
+        $project = project::whereProjId(request('proj_id'))->first();
+        $project->status_id = 4;
+        $project->save();
+        return redirect('sendMessage/'.request('user_id')."/4");
     }
     public function revise(){
         $progress = project::whereProjId(request('id'))->first();

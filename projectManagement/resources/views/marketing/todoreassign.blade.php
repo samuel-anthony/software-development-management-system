@@ -32,7 +32,7 @@
                             <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label>
                             <select class="col-md-3 form-control custom-select @error('user_id') is-invalid @enderror" name="user_id">
                                 <option value="">Choose</option>
-                                @foreach($desginers as $designer)
+                                @foreach($designers as $designer)
                                     <option value="{{$designer->id}}">{{$designer->first_name}} {{$designer->last_name}}</option>
                                 @endforeach
                             </select>
