@@ -198,7 +198,7 @@
                         @php($done = 0)
                         @php($doneLate = 0)
                         @foreach($client->projects as $project)
-                            @if($project->status_id == 1)
+                            @if($project->status_id == 1 || $project->status_id == 2)
                                 @php($todo++)
                             @elseif($project->status_id == 12)
                                 @php($done++)
@@ -313,11 +313,11 @@
             document.getElementById('division').submit();
         }); 
         var ctx = document.getElementById('myChart').getContext('2d');
-        var clr = ['rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)']
+        var clr = ['rgba(255, 23, 72, 5)',
+                    'rgba(54, 162, 235, 5)',
+                    'rgba(255, 206, 86, 5)',
+                    'rgba(75, 192, 192, 5)',
+                    'rgba(71, 255, 191, 5)']
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -360,11 +360,11 @@
     </script>
     <script>
         var ctx2 = document.getElementById('myChart2').getContext('2d');
-        var clr = ['rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)']
+        var clr = ['rgba(255, 23, 72, 5)',
+                    'rgba(54, 162, 235, 5)',
+                    'rgba(255, 206, 86, 5)',
+                    'rgba(75, 192, 192, 5)',
+                    'rgba(71, 255, 191, 5)']
         
         var myChart2 = new Chart(ctx2, {
             type: 'bar',
@@ -405,11 +405,11 @@
         @if(($type ?? '')=='user')
         @foreach($labelClient as $client)
         var ctx3 = document.getElementById('myChartSingle{{$counter}}').getContext('2d');
-        var clr = ['rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)']
+        var clr = ['rgba(255, 23, 72, 5)',
+                    'rgba(54, 162, 235, 5)',
+                    'rgba(255, 206, 86, 5)',
+                    'rgba(75, 192, 192, 5)',
+                    'rgba(71, 255, 191, 5)']
         
         var myChart3 = new Chart(ctx3, {
             type: 'bar',

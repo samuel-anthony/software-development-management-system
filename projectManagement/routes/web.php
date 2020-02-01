@@ -97,6 +97,7 @@ Route::prefix('marketing')->group(function(){
     Route::post('/approve','MarketingController@approve');
     Route::post('/revise','MarketingController@revise');
     Route::post('/disapprove','MarketingController@disapprove');
+    Route::post('/reassign','MarketingController@reassign');
     Route::post('/submitProgress','MarketingController@submitProgress');
     Route::post('/submitRevision','MarketingController@submitRevision');
     Route::post('/download','SalesController@download');
