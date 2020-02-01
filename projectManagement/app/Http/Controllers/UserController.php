@@ -29,17 +29,24 @@ class UserController extends Controller
         else
             $this->allMenu = DB::table('role_menus')->join('menus','role_menus.menu_id','=','menus.menu_id')->join('users','role_menus.div_id','=','users.div_id')->where('users.id',auth()->id())->get();
     }
-    public function sendTelegramMessage($userID,$senderDivision){
+    public function sendTelegramMessage($userID,$senderDivision,$proj_id){
         $user = User::find($userID);
         if(!is_null($user->telegram_id)){
             $token = "934290314:AAEzTr2xI7hIsYiw62gLjpY1rYaOtTniLGQ";
-            if($user->div_id != 3)
-                $message = "Hello, ".$user->first_name." ".$user->last_name." have a new task, please check your Task Management to do it.";
-            else
-                $message = "Hello, ".$user->first_name." ".$user->last_name." project already done by the assignee, kindly please check your Task Management to review.";
+            if($user->div_id != 3){
+                $message = "Hello, ".$user->first_name." ".$user->last_name." have a new task, please check your Task Management to do it.\n\n";
+                if($user->div_id == 4)
+                    $link = "127.0.0.1:8000/marketing/todo/".$proj_id;
+                else if($user->div_id == 5)
+                    $link = "127.0.0.1:8000/marketing/todo/".$proj_id;
+            }
+            else{
+                $message = "Hello, ".$user->first_name." ".$user->last_name." project already done by the assignee, kindly please check your Task Management to review.\n\n";
+                $link = "127.0.0.1:8000/sales/todo/".$proj_id;
+            }
             $requestParam = [
                 'chat_id' => $user->telegram_id,
-                'text' => $message
+                'text' => $message.$link
             ];
             $requestUrl = "https://api.telegram.org/bot".$token."/sendMessage?".http_build_query($requestParam);
             file_get_contents($requestUrl);

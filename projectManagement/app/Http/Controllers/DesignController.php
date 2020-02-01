@@ -143,7 +143,7 @@ class DesignController extends Controller
         $progress->assignee_id = $project->progresses[0]->reporter_id;
         $progress->comment = request('comment');
         $progress->save();
-        return redirect('sendMessage/'.$project->progresses[0]->reporter_id."/5");
+        return redirect('sendMessage/'.$project->progresses[0]->reporter_id."/5/".$project->proj_id);
     }
 
     

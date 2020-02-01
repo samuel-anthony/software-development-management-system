@@ -165,7 +165,7 @@ class SalesController extends Controller
         $progress->comment = request('comment');
         $progress->save();
 
-        return redirect('sendMessage/'.request('user_id')."/3");
+        return redirect('sendMessage/'.request('user_id')."/3/".$project->proj_id);
     }
     public function reassign(){
         $validator = Validator::make(request()->input(), [
@@ -181,7 +181,7 @@ class SalesController extends Controller
         $project = project::whereProjId(request('proj_id'))->first();
         $project->status_id = 2;
         $project->save();
-        return redirect('sendMessage/'.request('user_id')."/3");
+        return redirect('sendMessage/'.request('user_id')."/3/".$project->proj_id);
     }
     public function review(){
         $progress = project::whereProjId(request('proj_id'))->first();
@@ -213,7 +213,7 @@ class SalesController extends Controller
         $progress->assignee_id = request('assignee_id');
         $progress->comment = request('comment');
         $progress->save();
-        return redirect('sendMessage/'.request('assignee_id')."/3");
+        return redirect('sendMessage/'.request('assignee_id')."/3/".$project->proj_id);
     }
     public function finishProject(){
         $progress = project::whereProjId(request('proj_id'))->first();

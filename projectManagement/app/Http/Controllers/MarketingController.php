@@ -135,7 +135,7 @@ class MarketingController extends Controller
         $progress->save();
 
         
-        return redirect('sendMessage/'.request('assignee_id')."/4");
+        return redirect('sendMessage/'.request('assignee_id').'/4/'.$project->proj_id);
     }
     public function revise(){
         $progress = project::whereProjId(request('id'))->first();
@@ -164,7 +164,7 @@ class MarketingController extends Controller
         $progress->save();
 
     
-        return redirect('sendMessage/'.$project->progresses[0]->reporter_id."/4");
+        return redirect('sendMessage/'.$project->progresses[0]->reporter_id."/4/".$project->proj_id);
     }
     
     public function download(){
