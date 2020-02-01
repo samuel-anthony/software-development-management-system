@@ -25,9 +25,17 @@ class SalesController extends Controller
     public function index(){
         $this->getRole();
         //project::whereHas('progresses',function($query){$query->where('assignee_id',auth());})
-        $todos = project::whereIn('status_id',[1,6])->whereHas('progresses',function($query){$query->where('reporter_id',auth()->id());})->get();
+        $todos1 = project::whereIn('status_id',[6])->whereHas('progresses',function($query){$query->where('reporter_id',auth()->id());})->get();
+        $todos2 = project::whereIn('status_id',[1])->whereHas('progresses',function($query){$query->where('reporter_id',auth()->id())->where('assignee_id',null);})->get();
         $progresses = project::whereIn('status_id',[2,7])->whereHas('progresses',function($query){$query->where('reporter_id',auth()->id());})->get();
         $dones = project::whereNotIn('status_id',[1,2,6,7])->whereHas('progresses',function($query){$query->where('reporter_id',auth()->id());})->get();
+        $todos = [];
+        foreach($todos1 as $todo){
+            array_push($todos,$todo);
+        }
+        foreach($todos2 as $todo){
+            array_push($todos,$todo);
+        }
         if($this->Sales)
             return view('sales.index',[
                 'allMenu'=> $this->allMenu,
@@ -41,7 +49,7 @@ class SalesController extends Controller
     }
     public function createNewProject(){
         $this->getRole();
-        $marketings = User::whereDivId(4)->get();
+        $marketings = User::whereDivId(4)->where('isInactive',0)->get();
         $clients = client::all();
         if($this->Sales)
             return view('sales.newproject',[
@@ -66,7 +74,7 @@ class SalesController extends Controller
                 break;
             $index++;
         }
-        $marketings = User::whereDivId(4)->whereNotIn('id',$rejector)->get();
+        $marketings = User::whereDivId(4)->where('isInactive',0)->whereNotIn('id',$rejector)->get();
         if($this->Sales){
             if($todo->status_id==1)
                 return view('sales.todoreassign',[

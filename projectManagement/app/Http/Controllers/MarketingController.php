@@ -44,7 +44,7 @@ class MarketingController extends Controller
             if($progress->reporter_id != auth()->id())
                 array_push($rejector,$progress->reporter_id);
         }
-        $designers = User::whereDivId(5)->whereNotIn('id',$rejector)->get();
+        $designers = User::whereDivId(5)->where('isInactive',0)->whereNotIn('id',$rejector)->get();
         if($this->Marketing)
             if($todo->status_id==1)
                 return view('marketing.todoreassign',[
@@ -64,7 +64,7 @@ class MarketingController extends Controller
         $this->getRole();
         $progress = project::whereProjId($param)->first();
         $progress->reassign = count(progress::whereProjId($param)->whereReporterId(auth()->id())->whereAssigneeId(null)->get())==1;
-        $desginers = User::whereDivId(5)->get();
+        $desginers = User::whereDivId(5)->where('isInactive',0)->get();
         if($this->Marketing)
             return view('marketing.progress',[
                 'allMenu'=> $this->allMenu,

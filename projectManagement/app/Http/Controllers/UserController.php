@@ -76,6 +76,25 @@ class UserController extends Controller
         return redirect('home')->with(['alert'=>'alertError','message'=>'successfully reject task']);  
     }
     
+    public function sendHoaMessage($id){
+        $req = requestAdmin::find($id);
+        $hoa = User::whereDivId(2)->get();
+        foreach($hoa as $user){
+            $token = "934290314:AAEzTr2xI7hIsYiw62gLjpY1rYaOtTniLGQ";
+            $message = "Hello, ".$user->first_name." ".$user->last_name." a new request from admin has been submitted. Please kindly to check the request by admin\n\n";
+            $link = "127.0.0.1:8000/hoa/detail/".$id;
+            $requestParam = [
+                'chat_id' => $user->telegram_id,
+                'text' => $message.$link
+            ];
+            $requestUrl = "https://api.telegram.org/bot".$token."/sendMessage?".http_build_query($requestParam);
+            file_get_contents($requestUrl);
+        }
+        if($req->type == 'edit_user')
+            return redirect('/user')->with('alertSuccess','successfully requested to edit user');      
+        else //add user
+            return redirect('/user')->with('alertSuccess','successfully requested to add user');
+    }
     public function index(){
         $this->getRole();
         if($this->isAdmin){
