@@ -210,7 +210,7 @@ class UserController extends Controller
         
         $user = user::find(request('user_id'));
         if(!is_null(request('password')))
-        $user->password = bcrypt($request->get('password'));
+        $user->password = bcrypt(request('password'));
         if(!is_null(request('telegram_id')))
         $user->telegram_id = request('telegram_id');
         $user->save();
