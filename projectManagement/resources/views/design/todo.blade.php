@@ -48,7 +48,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6 text-center">
                             <button type="approve" class="btn btn-success" onclick="event.preventDefault();document.getElementById('revise').submit();">Revise</button>
-                            <form id="revise" action="{{$prefix}}/revise" method="POST" style="display: none;">@csrf<input name="id" value="{{$todo->progresses[0]->progress_id}}" style="display:none"></form>
+                            <form id="revise" action="{{$prefix}}/revise" method="POST" style="display: none;">@csrf<input name="id" value="{{$todo->proj_id}}" style="display:none"></form>
                         </div>
                     </div>
                     @endif

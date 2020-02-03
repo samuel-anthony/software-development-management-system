@@ -17,7 +17,7 @@
                         <label for="last_name" class="col-md-4 col-form-label text-md-right">End</label>
                         <label class="col-md-8 col-form-label">: {{$done->due_date}}</label>
                     </div>
-                    @if(is_null($done->finished_date))
+                    @if(!is_null($done->finished_date))
                     <div class="form-group row">
                         <label for="user_name" class="col-md-4 col-form-label text-md-right">Finished</label>
                         <label class="col-md-8 col-form-label">: {{$done->finished_date}}</label>
