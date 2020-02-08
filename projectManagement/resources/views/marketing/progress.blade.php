@@ -34,7 +34,7 @@
                         @csrf
                         <input name="proj_id" value="{{$progress->proj_id}}" style="display:none">
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">Assignee</label>
+                            <label class="col-md-4 col-form-label text-md-right"><b>Assignee</b></label>
                             <label style="margin-left: 14px; padding-top: 8px;">:</label>
                             <div class="col-md-4">
                                 <select class="form-control custom-select @error('assignee_id') is-invalid @enderror" name="assignee_id" id="">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">Content</label>
+                            <label for="role" class="col-md-4 col-form-label text-md-right"><b>Content</b></label>
                             <label style="margin-left: 14px; padding-top: 8px;">:</label>
                             <div class="col-md-5">
                                 <textarea class="form-control @error('content') is-invalid @enderror" rows="4" cols="50" name="content" style="border: solid 1px #ccc; border-radius: 20px;"></textarea>  

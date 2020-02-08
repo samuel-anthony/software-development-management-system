@@ -17,6 +17,8 @@ class CreateClientsTable extends Migration
             $table->bigIncrements('cl_id');
 			$table->string('cl_name');
 			$table->string('cl_email');
+			$table->string('cl_address')->nullable();
+			$table->string('cl_telp');
             $table->timestamps();
         });
     }

@@ -52,7 +52,7 @@
                         <form method="POST" action="{{$prefix}}/revision" id="review"><input type="text" style="display:none" value="{{$progress->proj_id}}" name="proj_id">
                             @csrf
                             <div class="form-group row">
-                                <label class="col-md-4 col-form-label text-md-right">Ask Revision to </label>
+                                <label class="col-md-4 col-form-label text-md-right"><b>Ask Revision to</b></label>
                                 <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label>
                                 <div class="col-md-5">
                                     <select class="form-control custom-select @error('assignee_id') is-invalid @enderror" name="assignee_id" id="">
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="role" class="col-md-4 col-form-label text-md-right">Comment</label>
+                                <label for="role" class="col-md-4 col-form-label text-md-right"><b>Comment</b></label>
                                 <label style="margin-left: 14px; padding-top: 8px;">:&ensp;</label>
                                 <div class="col-md-5">
                                     <textarea class="form-control" rows="4" cols="50" name="comment"

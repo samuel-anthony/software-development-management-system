@@ -44,7 +44,7 @@
                         @csrf
                         <input type="text"style="display:none" name="project_id" value="{{$progress->proj_id}}">
                         <div class="row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">Media</label>
+                            <label for="role" class="col-md-4 col-form-label text-md-right"><b>Media</b></label>
                             <div class="col-md-8">
                                 <input type="file" class="form-control-file @error('file') is-invalid @enderror" id="file" for="file" name="file">
                                 @error('file')

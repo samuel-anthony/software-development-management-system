@@ -139,6 +139,7 @@ class SalesController extends Controller
             'due_date' => 'required|date|after:start_date',
             'cl_name' => 'required|max:255',
             'cl_email' => 'required|email',
+            'cl_telp' => request('cl_telp') != null ? 'regex:/(0)[0-9]*$/' : '',
             'user_id' => 'required',
             'requirement' => 'required'
         ],[
@@ -154,6 +155,8 @@ class SalesController extends Controller
             $client = new client;
             $client->cl_name = request('cl_name');
             $client->cl_email = request('cl_email');
+            $client->cl_address = request('cl_address');
+            $client->cl_telp = request('cl_telp');
             $client->save();
         }
         $project = new project;
@@ -200,6 +203,7 @@ class SalesController extends Controller
     public function revision(){
         $validator = Validator::make(request()->input(), [
             'assignee_id'=>'required',
+            'comment'=>'required',
         ],[
             'assignee_id.required' => 'please choose who to you want ask to revise'
         ]);

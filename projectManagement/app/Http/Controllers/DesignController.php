@@ -104,6 +104,14 @@ class DesignController extends Controller
         return redirect('home');
     }
     public function disapprove(){
+        $validator = Validator::make(request()->input(), [
+            'reason'=>'required',
+        ],[
+            'reason.required' => 'please fill this reason column you reject the task'
+        ]);
+        if ($validator->fails()) {
+            $validator->validate();
+        }
         $progress = progress::whereProgressId(request('id'))->first();
         $progress->project->status_id = 1;
         $progress->assignee_id = null;
@@ -113,7 +121,7 @@ class DesignController extends Controller
         $newProgress->proj_id = $progress->proj_id;
         $newProgress->reporter_id = auth()->id();
         $newProgress->assignee_id = $progress->reporter_id;
-        $newProgress->comment = 'sorry i reject';
+        $newProgress->comment = 'reason to reject : '.request('reason');
         $newProgress->save();
         
         return redirect('sendReject/'.$progress->reporter_id);

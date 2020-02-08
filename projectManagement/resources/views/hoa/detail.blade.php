@@ -56,36 +56,36 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="user_name" class="col-md-4 col-form-label text-md-right">User Name</label>
-                        <label class="col-md-4 col-form-label">: {{$detail->data->user_name}}</label>
+                        <label class="col-md-4 col-form-label">: @if($detail->data->user_name == $oldData->user_name){{$detail->data->user_name}} @else <b>{{$detail->data->user_name}}</b> @endif</label>
                     </div>
                     <div class="form-group row">
                         <label for="first_name" class="col-md-4 col-form-label text-md-right">First Name</label>
-                        <label class="col-md-4 col-form-label">: {{$detail->data->first_name}}</label>
+                        <label class="col-md-4 col-form-label">: @if($detail->data->first_name == $oldData->first_name) {{$detail->data->first_name}} @else <b>{{$detail->data->first_name}}</b>@endif </label>
                     </div>
                     <div class="form-group row">
                         <label for="last_name" class="col-md-4 col-form-label text-md-right">Last Name</label>
-                        <label class="col-md-4 col-form-label">: {{$detail->data->last_name}}</label>
+                        <label class="col-md-4 col-form-label">: @if($detail->data->last_name == $oldData->last_name) {{$detail->data->last_name}} @else <b>{{$detail->data->last_name}}</b>@endif</label>
                     </div>
                     <div class="form-group row">
                         <label for="role" class="col-md-4 col-form-label text-md-right">Role</label>
-                        <label class="col-md-4 col-form-label">: {{$detail->data->division}}</label>
+                        <label class="col-md-4 col-form-label">: @if($detail->data->division == $oldData->division->div_name) {{$detail->data->division}} @else <b>{{$detail->data->division}}</b>@endif </label>
                     </div>
                     <div class="form-group row">
                         <label for="email"
                             class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-                        <label class="col-md-8 col-form-label">: {{$detail->data->email}}</label>
+                        <label class="col-md-8 col-form-label">: @if($detail->data->email == $oldData->email) {{$detail->data->email}} @else <b>{{$detail->data->email}}</b>@endif</label>
                     </div>
                     <div class="form-group row">
                         <label for="phone" class="col-md-4 col-form-label text-md-right">Phone No</label>
-                        <label class="col-md-4 col-form-label">: {{$detail->data->phone}}</label>
+                        <label class="col-md-4 col-form-label">: @if($detail->data->phone == $oldData->phone) {{$detail->data->phone}} @else <b>{{$detail->data->phone}}</b>@endif</label>
                     </div>
                     <div class="form-group row">
                         <label for="phone" class="col-md-4 col-form-label text-md-right">Telegram ID</label>
-                        <label class="col-md-4 col-form-label">: {{$detail->data->telegram_id}}</label>
+                        <label class="col-md-4 col-form-label">: @if($detail->data->telegram_id == $oldData->telegram_id) {{$detail->data->telegram_id}} @else <b>{{$detail->data->telegram_id}}</b>@endif </label>
                     </div>
                     <div class="form-group row">
                         <label for="phone" class="col-md-4 col-form-label text-md-right">Inactive User</label>
-                        <label class="col-md-4 col-form-label">: {{$detail->data->isInactive == 0 ? 'false' : 'true'}}</label>
+                        <label class="col-md-4 col-form-label">: @if($detail->data->isInactive == $oldData->isInactive) {{$detail->data->isInactive == 0 ? 'false' : 'true'}} @else <b>{{$detail->data->isInactive == 0 ? 'false' : 'true'}}</b>@endif</label>
                     </div>
                 </div>
             </div>

@@ -195,8 +195,12 @@
         $(".getValue").on("click", function(){
             var selectedClient = $(this).data('client');
             var selectedEmail = $(this).data('email');
+            var selectedAddress = $(this).data('address');
+            var selectedPhone = $(this).data('phone');
             $("#clientName").val(selectedClient);
             $("#clientEmail").val(selectedEmail);
+            $("#clientAddress").val(selectedAddress);
+            $("#clientPhone").val(selectedPhone);
         });
     </script>
 </body>

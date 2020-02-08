@@ -13,7 +13,7 @@
                         @csrf
                         <div class="row form-group">
                             <div class="col-md-2">
-                                <label>Start Date</label>
+                                <label><b>Start Date</b></label>
                             </div>
                             <div class="col-md-7">
                                 <input type="text" id="datepicker3"
@@ -28,7 +28,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-2">
-                                <label>End Date</label>
+                                <label><b>End Date</b></label>
                             </div>
                             <div class="col-md-7">
                                 <input type="text" id="datepicker4"
@@ -43,7 +43,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-2">
-                                <label>Client</label>
+                                <label><b>Client</b></label>
                             </div>
                             <div class="col-md-6">
                                 <input type="text" id="clientName" class="form-control @error('cl_name') is-invalid @enderror"
@@ -63,7 +63,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-2">
-                                <label>E-mail</label>
+                                <label><b>E-mail</b></label>
                             </div>
                             <div class="col-md-7">
                                 <input type="text" id="clientEmail" class="form-control @error('cl_email') is-invalid @enderror"
@@ -77,7 +77,35 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-2">
-                                <label>Assignee</label>
+                                <label>Client's Address</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="clientAddress" class="form-control @error('cl_address') is-invalid @enderror"
+                                    name="cl_address" value="{{old('cl_address')}}">
+                                @error('cl_address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Client's Phone Number</label>
+                            </div>
+                            <div class="col-md-7">
+                                <input type="text" id="clientPhone" class="form-control @error('cl_telp') is-invalid @enderror"
+                                    name="cl_telp" value="{{old('cl_telp')}}">
+                                @error('cl_telp')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label><b>Assignee</b></label>
                             </div>
                             <div class="col-md-7">
                                 <select class="form-control custom-select @error('user_id') is-invalid @enderror"
@@ -97,7 +125,7 @@
                         </div>
                         <div class="row form-group">
                             <div class="col-md-2">
-                                <label>Requirement</label>
+                                <label><b>Requirement</b></label>
                             </div>
                             <div class="col-md-7">
                                 <textarea class="col-md-5 form-control @error('requirement') is-invalid @enderror"
@@ -156,7 +184,7 @@
                             @foreach($clients as $client)
                                 <tr>
                                     <td>{{$num}}.</td>
-                                    <td><a class="getValue" href="" data-client="{{$client->cl_name}}" data-email="{{$client->cl_email}}" data-dismiss="modal">{{$client->cl_name}}</a></td>
+                                    <td><a class="getValue" href="" data-client="{{$client->cl_name}}" data-email="{{$client->cl_email}}" data-address="{{$client->cl_address}}" data-phone="{{$client->cl_telp}}" data-dismiss="modal">{{$client->cl_name}}</a></td>
                                     <td>{{$client->cl_email}}</td>
                                 </tr>
                                 @php($num++)
